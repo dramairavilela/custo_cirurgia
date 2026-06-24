@@ -234,6 +234,17 @@
   .btn-clear     { background: transparent; color: var(--muted); border: 1px solid var(--line); }
 
   /* ── PRINT ── */
+  .no-print { }
+  @media print {
+    body.print-resumo > * { display: none !important; }
+    body.print-resumo header { display: flex !important; background: var(--wine) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 14px 24px !important; color: #fff !important; }
+    body.print-resumo main { display: block !important; }
+    body.print-resumo main > section { display: none !important; }
+    body.print-resumo main > section#secaoResumo { display: block !important; }
+    body.print-resumo .actions { display: none !important; }
+    body.print-resumo .no-print { display: none !important; }
+    body.print-resumo #rsFpgContainer { pointer-events: none; }
+  }
   @media print {
     body { background: #fff; font-size: 12px; }
     header { background: var(--wine) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 14px 24px; }
@@ -266,17 +277,12 @@
 
 <header>
   <div class="brand">
-    <div class="brand-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#6B1A2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-      </svg>
-    </div>
-    <div class="brand-text">
-      <h1>Life Varizes</h1>
-      <p>Cálculo de Custo Cirúrgico</p>
-    </div>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWYAAAByCAYAAABgFnsvAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAFXJSURBVHhe7d13eBzV1cDh32wv6r33Lttyt2zL3WCDbTAEA6GGmoQSIAnphSQkhARCGqGEDqYaDO69W+6yZMmS1XvXqqy0u9o63x+rbrkAMpgv8z6PHtDM7EqWVmfvnHvuucKxMouIRCKRSC4bgiiKUmCWSCSSy4hs5AGJRCKRfL2kwCyRSCSXGSkwSyQSyWVGCswSiURymZECs0QikVxmpMAskUgklxkpMEskEsllRgrMEolEcpmRArNEIpFcZqTALJFIJJcZKTBLJBLJZUYKzBKJRHKZkQKzRCKRXGakwCyRSCSXGSkwSyQSyWVGCswSiURymflGB+aSwgI621qRev1LJJL/T77Rgbnj+Bay//0TTm35kF5T98jTEolE8o30jQ7MXQ1VWHuMVO5aQ85HL12S4GzttdDaVD/ysEQikVwy39jAbOvtxdTWCIAoumgpPEL+9k/OSmu011fS09aEy+Ucdvx8TMZOig/t4uBLv2PLb7/DyU0fjrxEIpFILplvbGBua3YH5X6iy0XT0W3UVpQOO1626xOyX3mSoq0f0tN94RF11emTHH79ac58+hItpadwOR3og8JHXiaRSCSXzDc2MHe0tfT9nwCCAIDD1kvHqb3DrrO0t2Bqa6Rk5xr2PvMw1adz4ByThQ1lheR98E+MtSW4nI6B4+Ex8cOuk0gkkkvpGxuY+yk1WrShg4HTUFmMy+Ua+FznHwSAIFfgtFnJX/MiLXVVA+f72W02zmxejctsHHZcodIQEBI27JhEIpFcSt/YwKxUqQBwWHtJW34HgkwOgN1qwdprGbhOHzsBANHlJP3q23CaO6nN3jRwvl9h9k66aooBkMkVaL38AND6+CNXqkdcLZFIJJfOZROYK3MPs/m156gvPIHFbBp5GgCTsWtgci8sKha5So0oujB2GAiddgWCIEMQZCiVyoHHJM1YgG9cOgBlp/OInruStvICgGEThZ35+0EUkSmUhE1bhDrAPUoWvIMQVBpcTicWi3ngeolEIrlULpvAXN/SRm/hAXJWP8fRt56hu71t2HnR5eLUZ69RdyYPAA9vHwLGZQHQWXKCxKylqH0CUes9USjdo2kAh8POhOu/i090Mra6InziM/CPT8fc3UXB1g9wOBzYenvpbq5FrlITmXUtweNn0t1QCQhEJk9ArdFSczqHgnWvDzyvRCKRXCqXTWDW6T0AcFgttJedonDzOzgc9sELRBFDyUlOvPYk+Xs24XI6mHLt7fiEx9Fx5hg63wBCZi7D2NpIbVEu9I2ws198Aouph4ybH0Wh0SF0NzP1pofoaayifPcnnNizFZfoQpQriZt7DWkLr6F271qcvSbkOk9CMrIQBIHKne9Td2wXZ3KODH5PEolEcglcPoHZwxMAmdydhmirKMTc3jpwXkTEbjEhiiJVO94jf/snqPWeTLr5YXyTptBQXkzG/KsInTCLsh0fYuzsxNTWQK+xg7oD6/ALCCRp+d2011f1TQ4K6P1D8LR3otHqmHDjw8RlXU3ehndoLT2FV2QiU+/8KV6+7lxzV0M1gkxGy6F1Z9VKSyQSyVi6bAJzSEQUAN5h0Sg1WmzGdrrb+0viQABkCnfQ9o2Io2LXGtpbm/EJjWLmrY8QkzIOmUxG+pIbEQU5J9/5KzaHi6DUycgUCgCiUsZj7OrEbrOi8QsmdtFN+KXPBCA6fRK5G96hJXcf4QtuIuv+3xAWnzLw9UXAJyIOY3MdFlPPwHGJRCIZa5dNYPbxD8Q3fjwmQxOxV9+NTOvJmewduJx9K/YEGT7RyQCIwYlovf05vn8XAHKFApncHXy1nt6kXn0bxs52DMU5RMxYSuz86/ueQobDBS6nE6+AYBKmzCYwLIr6M3lk//dJBFsvMx96iilLr6f+5D6ayk4D0GloQ6HzxOwTgz4kBm1f2qW7swNDbQUdtWWYOw3u7xP38zeXnKKttmLgmEQikVysyyYwA4xb8R1cSh321hrGrbyP3vpSzuz8GLvNhiCTET17OXKNB3rBTmj6VNQa7cBj25obObJ7K9k7NqHz8Wf2vb+koawQi6GRgPBo90UiOO22gcc01lSS8/6/Kd67nvj51zJp1fcICIuiobyYom0fceqDf+N0OqksKUTt5UfytDlMWvV9enstnNn+Idmv/IEjrz/FkTeeprn45MDzVmRv4fg7z1K6/aOBYxKJRHKx5E888cQTIw9+FfIO7qJi62oaTx/FYDThExCMV0AQAUkZtOQfJmbWUvxTplB3eAsNpQX4hkbjGxaNd9IU5HYzETOWEBmXOFDPfPztv9JyZCvmijw6yk4ROW0RQVFxFG18C4+oFPTePth6zdTkHiQ0aTxF+7dSvm01QQnjGL/iTnxCIlD0ldmd+uBf9LQ2YLdaiMxcQsvhjfhGJZEyaxFKtYacta9ReWAD9p5OnFYLgkxGbOaV6P2Daaku5dTaV7CZjPS0NuCTOh1Pb58R/3qJRCI5t68tMJs7W6nc+ynGpho6y05iqC3HKzoF/+AwIiZloVAo8fbzJ2R8JjKZjDP7N9N8JgetUoY2KhW/wGBU6sGFH+rACHqaqnFaLfgmTsQrJAr/yHgcgpzqA+sJSp5EZUEOnUXHaDp9DEEmJ+3q24iZOhflkPI6gJJ9G5DrvdF7++ETGU/dyX0kXXUbWr0H5fk51Oz+ENHlQucTgL3XjG9UInHzrkGhVJK76T2MNWcGnsvUaSBmypxhzy+RSCTn87UFZi//IBoqzmDtaEbvH4yxvoKehmoiJs9FJpMhk7mzLAqlEp/QKKIyZiD3DqJi33oqdnxAW3k+zSYnweFRyORyPHz8iZm2gG6FNw3tXaRNnYlSqcI/Mo6mgiNoPLyp3r+O3o5mYq68lYlLbsDDN2DktwWAqaMVz6Awohesomj7R0TPuprwvonAUx/+C7lcweTbH8dQdgqbpYf0m3+IX1AIZpOJ0x8/j9ifFwfsRgN+6TPRe3oN+QoSiURybl9ZYN720p+wm7pwCnK0nl7IFUp03n60leWj9g4gZOZy9J4eyLwCBoKYtdeCQqHE6XTSVleJubESk6kHW3sjvd2dmCpyqTm6k+qyYhSIyNRaYlPHk5IxBUVfBYcgCHT1mKnev56uhirir7wF/6AQig5uozB7J/VncrF3t+OyW9F4ByAIAl4RCfhHJ1O2bz1ypYrUOVchVyhwOp0oNVrCJs+nbNt79LS3kLL8bmInTAUgb/dGOksHc80IAqIo4hUei39E7ODx/2GiKCL2/V6+jP6SxS/7PJLPx+lyIbsMfuaiKP6//t0L4ldUlLvh13fg6DWj8PQjfMoCJi37Ni6Xi46GKvI2f4Czq4XIOStJmjYHmUxG/vZPsNpsJM+6goLNq2mvKMInNo3AhPEEhUciCDJEwGbtpbG6gs7KQuwdTYSNm070rKuGjVCbSvI59PITaBKmEDduMmXbP8BmGmxWJAgywudcy9QVtyIIArZeM3nr38Le2cbkWx5Bo3fXWANUF5+mfOPr2NReZCy9keCYhIGKkKNvP0t9Xrb7OVU6BKUal6mDpIXXk371rQPPMdbqGpvJLyrpK+obztvTk6kTx6Easkz9fDbv2jfy0ICZkzPw8fEe+PzEqdO0tA1Wo5xPU1sn5U1GSmsa+PW91zEuJXHwXGsbJ/MLh11/Lq2GDqrareQUlvPCL+8lNChw5CWj6uzq4nDOqXPWoM+YnIHfkH/b+RSVlFNVN/rmCVnTJuPp6a7aGamto4uCM2XMnzll5KkLyi8spq6peeThYWQyOeEhQaQnJ1xU0HI4nRw+nku3afQWCONTk4gIDRn43Nxr5fZf/IPosEBiQ/wI89Gi02mGPWY0Npud5nYj9V1WfD09ePS25cPO5+QX0tw6fKXvaOwOJ83tRsqaujBbbDzzoztRq879unY6new7lseHO49TWd+MydxLbHgQ6TEhhPvpuHLuTIICR79r/rp9ZYF542/uxGYerP/1TJvFvFsfRKk++xd7es9GqnZ/REzWNdQe2YomPImJ192Nj4/vyEuHaWtuonr3Gtqam5h503fxDI5AEARyt6+ldv86Fvz4OYrWv05PWxOCQk1PUxX2XgvBE+eRefP3EQQBS5eBQ2teQ6+UMf32H+ISXdjMJnqN7dSc2E9z6SliF91I4sTpZ734j777T+pz3G1HvZOm0NPegrOtluiZS5l43T0D6ZmxZrb0UlZVw+9f+YzNB3JwulyEB/nxm3tXsmzudPx8vS/6a1fV1rN60wGefnMdNrsDQRD4zvI5PHbrMmKjwof1IWnvNFJUVsUv//MRh/NLUCjkxIYFouqrGx/JarNjslj44KkfMH3S+IHjvVYrZ0or+dWLa9h1tACXKBIR5Iu3h37Y4/tZbXZqm9vI++CvxEReXK9su91OfVMr723Zz78/2I6hy92bW6dR89pv7uWqeZmo+yaSL6Sj08j7G3fx439+gNPlwt/Hk4duWMzNV2URGRaC4hz//pNF5Tz+3Fts+c+vz3nNuXQZezh6qojH//EuZ6oakAkCMWGBaNVD2w84MRh7sNod3HvdIu7/1mJiI0KHPc9QoijS2NzKmq37ePK19RjNvSjkcm5dmsnP7v4WwYF+6LSDlU895l7SVv4Ab08tHrrB4+fjcDopqWrAancQ4O1B9ptPEhU+/HsydHSy/2geP/z7ahraugBIj4sYds1Q3SYzgf6+bH/pt+g0ozcYM3R08ct/vs32o6fJmpjCwknxaJRyDhbVs3H/CcxmC2uffYzMyRkjH3pZ+NoCsyCTk7LiLpKzlg4LcFaLhV3P/ACXzYbL6SBk+hVkLLkRlVZHZ0sjnR3tRCakIJe7u8mN5HQ4qDi2h/Jda0hf9RARCWls+9vj+MWPY9p1d9FaV0XzqYPUF+XS21pL0MR5ZCy7BZlSRfH+zTTn7MbSaSB0wky0ej09nZ2YOg3ovLwJTMogNH0GHkOqLHq6u3HY7fj4+VF84hCF7z0DQMgVd9CefwBbcyVpV91C8kJ3LfWlVF7TwLWPPEV5fSu/uOc6fnnfqosOyEM5nU5u++lfWbv3JCkx4Rx44w946EcPkgC7D5/kqof/TFiQH5uf/yVhAaO/gZrMFl5Zs5krZ04cFpj7GTq6mHv3rymva+aFx2/hhqsXj7wE+v4wn3p1LT+6fdlFB+Z+DqeTNVsPcPcTL+ASRWLDgyn69J8jL7sgURQJXXQPFquN9//8KEtmT0EmO/8o9Zd/e5Xn3t/Ou398gJVXzB15+qLsOHSSm376d0SXi3XP/ZCM1KSBczabjdKaJt5Yt5O3NhwgLS6cf//sbjInupt4nc9PnnmFf36wnejQAPa99geCA9wrXofqMffy0+fe5Nf3ryIk8OzzozmYU8hNP/0bRpOFJx+4iR/cds3ISwbsOHiM5Y+6/35ad7828vSAmoYm3tywnyce+Paogbmjy8h3f/cfCirq+M/P72X+jIkD51wuFyeKynnojy/zjx/fdtkG5s//VztGRJeTmpz92Ia06ARoaazD2mPEZunBJyKOaSu/g0qrA6CrqpDcV3/H/hd/h9EwuCpwz/qP2fnZBxhampErFCTOXIwqZhJV+zdwZM82rIZGIpMnIIoihuZG2mtK8fD0ZNLtP2HGjd+lruQ0O596gKaj21DGT8ORNIfaXgU1ZhnaxKnMvPtnzPrOT0ictQS9l9ewfs8Nx3Zy8q2/YLPZSJ4yE4/AMBQqNUmTMqEvTaIO6qujvsR8PHQE+Xogkwkkx0Z+oaAMIJfLmZfh7nGdnhB13qAMEB7kDsSCIKDXavH00I/6ERIUwH2rrurf1+AsnnodUQHur6VRKc56fP9HWHAgNy125/U/L4Vczs1Xz2PhDPcbQ1NbB7UNTSMvu6BThcV0dpu4JmsCV82ZesGgbOzu5oW1e3GJIr/4z8c4nYOvoc8jJNAfvVYFgnu0P/Tn4u/nS+bEVF78zUPcsHAqBeV1PPjUaxg6Okc+zVniI93dFDVq9ahBGUCpkLNi/vSLDsoul8i/311PW2c34+IjuG35vJGXDLN49rSB/x/5Ox/6kZ4Uz5LZU5Cf4/W982gBW48U8IMbFw8LygAymYxp6Yn89p7h6ZTLzej/sktA09/f2C8Yuc6ds+1trhqW6wXAbkUXlULcnBVMuvkHw8/16ag8zaE3n6GrzZ1z87B1YNz/Idl//xEF29Zgt1nJXHkb5uZqOg9+gkLngdLLD0EQSJkyk7nfe4Lpd/4EBU72vPxHqnavIWHucjIf+CMLbriD67/zPa69/V6W3fwdJs6ci97DE6fTSdnxA+z++0+pOeVuZGS3WWk8k4OxvZnGmkoArB5BhE1dhFKpRHS5UAfHEJZ44RHL/4rgwACmTTx7tPx5pcTHEuA3+sj8Yjx84xK0ahU2u4PN2efOPY/G6XTy7Ltb8dCq+fayBSNPj+r59zejUSuJDQ+iprGV3YeHTBJfAneuXIy3h46K+hZ2H7u4/P2FKBVyJqZc/CT2e5t2s/5ALjqNmj98b9VF5/AvxriESBSK0e+adx48jtVmZ8UCd7uF0cyZMeVLvX4utTEJzN3GLnotw0e+Z/Fx55WUWj1h42YA4LRZKS/KH3ZZaHwyWd95nPHLb8fD79wTO+aGcvLX/heA4Ax3+09wUbV/He2VRej0etR6LyxdBpRaD7Q+g0l+Q1srOe/9k9yPXsQzLI6Zd/2M5IXX4+3rD0DB3o0c3/jBwPUA3e2tlOz4CGNjFS6TOw8GAp6BoQTFp+Hr7/5ePQQ7cTMW4XDYUXh4kXnHj1CNkkeXfDkB/r546N13Ul/EpLR4xseH4XS52HbwBGZL78hLzqm4ooYDJ4tIiAwhc8JgKuFcWtra+XjnEa7IzODmpVk4nE7W7TuBwzG4fdlYS40JI9jPC4vVxtE8d2uBL0smkxHif3GLpc5U1PDoM2/hcLp49NtLWDBz8shLvpRgf59RR8wiUNXgvpvWjJLm6Ofp4UF8dOTIw5eNs/9lX0BpwUm2/+Fejnz4Eu21ZaM2uo9OnQCCDHOnAb/U6fjGpoIg0NbUMOw6hUKJTu+BTC7nyKdvUZ1/DGdf+0+5UoUgk6H18UemUNJeXUJLYx2RCSn4xaXjERROQNIk2pvcM+b9+/Z5+Aeh8/B0d6bLO8LxV56g1+li2n2/Ydo1t+LpHwSCgNHQyuE3/kLZhtfpqi4a9n25zEac3QYUKg0WYzv07aISN+9aJt30EBqtloMfvIw2IAzPoHD0Xj7MuPkhfAODhz2P5PIQ6OfD0ix3OiT7VBkNLe7f6cXYe6KIlvYubl0296JGgYcLyqhtbue7185h5ZwM5DIZu46cosVw4RTDF+Xj7YVO6x4QXEwqYyyZe608/cZndJssTEmL4/vfXvGF02qflwColO6J1X1H3b3bz2Xk5P3lZEx+Wl7evjhsvTQc3cah//6eY6v/QfWpo8Ou8YtORu3li9PcTVddOVNu/SGBKVNwNJRiMZ+9M4jL5cJcfZr8D/+NodK9kk7uHYSgVKPzC8Y/fhwup4PONneZTcrVt6Px9kem1hGYMgVRFDEZ3LlDr2D3O2Nh9g5Ob/uI1CtvJvPWRwjs76HRp3Dj2zSdPgaARhh+a9vaUIvawwufiHh3LW7fra9PUBgKuZzT2z7C1lhOysLrUSiVqNVqfP3cI3DJ5UcQBG65Kgu1Skm7sYe3N+wZecmoRODT3UcI8ffl9mXnz5n2+3T7AdJjQsicksH41CRmT0qlorGNbQdPjLx0zCjk8oHAM3RO5Kuw72geG/adQCYIPHzTEvx9BstNvwopce5Olc+v2UlD84XL8C5HYxKYdR6DNcM2swlD8Qly3nqaY+/+E3OPuyzJLyKW1JX3o9DqaD6+A41Oz/hvfQ+VaCN3zUuYuofnmp0OOy6nE6fDTnudO38bEpNISHIGXR3t+E9bglLrgbNvVBwck8jMu37GtFX34xsQyPF9O3BY3benFpUnjWVFlG96k4xrvkPU5DkolaphL9gzeSdozM9GF+BOuVjlg7dBoihSfnw/ETOvxm7uJiA2FaFv8Yit18Ket/9J25njTL/nV3gHuDd/lVz+YiJCuf+a2QD8+8OtdBndr9XzKSqtYN/JM/zghvn4eF844HT3mPhsfx7fW7VkYEXrz25fiijCX9/edMmCZqexG0uv+/WfFBcz8vQl02My8+Bf3qDbZGFR5gRuvnr+V74gZencafh66TmQW8zP/v4GNvulSxldKmMSmPubyfdTaLQgCNTn7uf0hrcGjseOn8rsh/9CyJQFlB/bi7ePL9Pu/hUKjZYDrz1NxaHtdLW580NKlRqP8Hh8kqeg8XOnAwSZjJQV9+AdEILC1M6M+58gKn54jk8QBORyOdbawQmPHquTioObyLj+uwRExVF7cj8H332estzBUX1bwSECU6fiGRyJIJMTltS3iasoUpq9HY29m6gJ00m96hYCkzLotVgoPryL/S/8FpXoYMadP0HveeE/1P9lHZ39ufkvx9DejnPIsvcv45E7v0Wgrxdmi5W3159/1OxyuXj8b28SGxbIyqXzR54e1a///Q6h/t5Mz0gdOJY1fTJpsWGU1zXx6U73gqSxllNUTmNrJ94eOmZkDPYVv5SsNhs///sb1DcbSIgI4rXffn/kJWOioWmwIms0szKS+d4NV6CQy/lwxzG+/eOnqaxtHHnZZW1MArPe0wuVfnDUrAsIxzcmFdHloj5nL/nHDg6c8w0MZsLSm4jva+zj6eXFpOvuIfmKVTSeyib7hV+Ru+ZFqkrPkLHidsInzSNy3OBKKS9vb5KX3Ez54R3IFKpz9qAwlg3mlxw9ndhcIpETZ1F5ZCcnP3oBQ/5+vLSDxfkKmwmv1Jn0GJrQBYQSNdn9/dWXFVK87X0iZq9A7xtIcMpkKk+fZP+/f07VnrXEzL2GzFsfwaXS0do4PF9OX2DvNLTR3nL+VVv/39ntdo7mDp/o/aJ2HjiKpdc68vAXEhoYwNKZ7iqRz/Yeo6v73KPm3MJSducUs3D6eMIuomSsuq6BdzZnk5mRRHjwYFpLqZCzdPYkAN5cvx+rbbAV7VhwOp088/ZGukwWpo1LIHOCu4/5pZadW8yaXcdRKRX86M5rCfS/NFUPH24/PPLQMGqVip/fu4rf3P8tVEoFmw7lc/cT/6G9b1HRN8GYBGZBEAjLugZB5i5fMbfVEzZ1ERGT5yAIAu2H1w8rR5LJZCiH9FJWKJXEpE1k5n2/ZsK3H0Pl6U3d7g85/M4/aC3Pp/zoXtqriuloqsXY2Y5feDTRk7I49e4zGNvOrkHttZixmQd/CarWctSevoiii8biU2j8w9H4BqHrG4kDxM1aQlR8EqHp05h272/w9PWnq6GK/M9eJygpg6DwKAr3bebw609Rs+cTfMbNJuvBPxI/JQu7zUr+xy9Ssu6VgZGcy+mk9PgBdjz9ILuf+i57//IAG351O9v+/RuObniflsriz1Wi9U3gcDioqqunvKpm2EdZdR0f7zhEUXnNyIecU3Nb51nPU1pZw4Gc07y17fiY/ezkchkr5s9Ar1FTVNlAYcXoS62dLhdr9xwHEVYtmn7BlXuiKLJ+fy7mXivXzp+Gcsj1giAwf+o4PHUa8kurKCy7+J/LMCJYrTbMll66jN3U1Dex49BJFt77Ww7lFTM5NZb//OzugUnAS6nXauWvr39Mh9FE5rg4rls4feQln8vI3315VQ3FFTW8+P7GgdWB56NSKnjkthX8/K5r0WnUHDpVwtUPPUlBadWYvXYupTFb+We1mDn+/r9oKTwGooguOIqZ9/6K4s2rqT+5jyt+89o5R7ejcdjtdBpasXc2kb/+bWxdbQgaD+RaPR7evqh0nrScOYF3aDQpK+4hMGJwIq+9tYV9f3kQUXTn7wRBIO6Kmxm/+HoqC05wZuv7RE6ZR9rcq5EP+YMRXS4QBBwOO+WHdlC97zN6uzvR+IWgDwhBHxZHRPJ4tAHheHgNzsYf//A/1B3fDaLI9If/SlhULOaONvI3vEldew/BAf44DPV01JS4HyAIRGQuYcoYL9M2tHey6sdPc6Switd//zA3Xjlr5CUX7cW3P+LRf67hW4tnsvqpR0eeHqakoooJN/0UpUJORkI4mr5Z8X6iIOd0ZQN3Xz2DP/34u8PODWWz2bn2wd+wO7eCpIhAgnyHp4YcThdlDW0E+Hix//Un8TzHku3Pq9PYzcL7nqCooo6f3Lmc3z10+8hLaGnvZOUjf0av07Lp+V8OC7SjMfaY+PZPnqGktoXcD55BP2IJc5exm6y7fkV5XTO/u/96Hr/nxmHnz6WgrIarH/wDPeZetv7rJxg6uvhkXx6Vdc10Grupbu5ABO5eMYfv37ycmPCLqwp66YNNPPLMmyTHhJP30d9Gnr6g37/4Pn9+/TM8dRq2/ecXZKQO9kL5PDTTbgIga3zcyFNYbA6Kqpu59/or+MtjZ/+ORmO32/lw6wEe//s7tHf1MC4hihd/eR9Tx124zPHrNGZRQa3VMW7l/fjHjQO5AnNzDeXH95F27d14hkTS3dkBfcGvs6WBomMH2bf+I47v3ozV1H3Wu5hMJsPa00XZzk9QKBQEZC5n3E2PMOnmH+AzcRG9Wn88A8LobKjm8PM/J2/Xeqx9ZXoul3NYOx+X6MLUbUSQyfAJjWLaHY8zfuE1w4IyfROOzdVlHH3tzxRvWY0oCATPWMrEW39E5u2PkT7vanzDYoflkotzj1F7bBfgngzsaHNvIKvz8WfyjQ+QMXcJ1sbygaAsCDK0fiEkZC0b06B8OdCqVbzz9OPseO2pYR87X32St5986HPNzv/8zqvOep49bz7Nrhd/TbDfhUvUPg8fL08eXrUIgHc2Hxq1vjj/TAUF5bX8/Ye3XjAoA1TVN3Mov5zHb116VlAG8Pby5Pbl83G5RF7fcACH4/PnzOVyOUsXZPHYbcsxdBo5XdXIDYszqdr4H57+0T0XHZS/rCN5RTz79gYE4Od3XfOFg/JQI3/3O157iv1vPc3TD60658rR0SiVSm5ZNp9nf/QdvD10FJTVcONPniMnvwiXa0zGpJfEmEYGb19fZt37S9JWfhefpMl0l+UiiCLT7v71wARhr6mb3A+f58wHf8Ow931qN77C4TeextQxuCO2sauLUxvfoXTnJ8RmLWPW935H5vKbiE5MITg8inFTM5l73a3MffhPzH7wT4y79i66Kgo4+PrTVB7ZidPhYOjvTkDA2OGuU/ULDCYweLBjFn2pj/q8bI6s/gcF69/EIzKRSbc/zqKf/IvM6+/CJzCY2lNH2fvC78h+5Ukqju11j64BZ0MJWm8/AuLTEWQyAkPdvRvKTx7i6NvPUbdvLU67DY23H95RycQtuI7Me3+Fb7B7Cez/irlTx5Ee7y5j+jKS4mO4a/msMa9BvXnZQhKjQ6lvMfDuxuGTgKIo8uzb65g7KZn05IRh587luTfXIggCoX4e7Mk+OupHtJ8GuUxGRV0zH28/MPIpLlpqfDQv/PJ+QgJ8eWfTfp544T1Mo5SgXgomSy/Prd6IzWYnc0Iityy/uJWQX4RMJuPuG5YR7P/53pgFQeCmJbN55YkHiAkLoqG1nVU/+yf7jp8aeellY0wDM3354qTMBcy563Eyv/MTtDo9Xr5+6DzcoyWNhxepV9+BQu0eRSg0GgImzEOhdq/iaq4uJ/s/P8NqMjH9loeJyJiJRqtDdLk4/u4/OPz60xx75znOHNmLIAj4hYQTm3kFs+74IYmLb6Lq0FYqt793VgtMtXX0IntDcyN7XnqSgvWvEzR+FnPu/TkTrrqZqNSJA53UXE4nFXs/w2npwVB1hqINb9DT5Q70Co0Ov7g0VF5+eKTPISA4lOKdn3Bm41tEzb6arO89wYJH/8KiHz3HnO/+mvFLb8YncPgbw/8CtUrFojnu/iFf1vVLF4w6Cv0ytFoN9610B5Vn3944bELu6Ml8Dp4q46arLq7xUFllNR/tOo5CIeeXL33KI8+uHvXjT29twVPv/nf88ZW1X2oScMbENF78+d0APP/hdl74cNtZd6GXwta9h9iw7wQi8NgtVxHod3ErA78ouVzG929cOvLwBclkMlbMm8abv3+A8EAf6lvaefKVtdi/wJ3KV2HMAzN971AKpQqVVo8w4nZdEASC45KZ++N/krz8LpIX3YDO1w9RkFF5Yj/HPvgPcdOvIPWKb9F8+ghVBTnuF5gANouZxtNHaSg4TNnW1ex56+9Y+5ogKVRqIpPTmf2936Hw8u9bAzSop6kGu929gpC+mevyk4c49t8n8I2IZ85jz6HReZC77RP2vPsCpYd20N5UhyiKaHU6xt/8CBHTF5N65U1EL74FF+6JTv9xM9EnZxI1eS4Lb32AMwe3U358H9Pu/AmRqRNRqLUotXpUOg+Uau1ZP49+5m4jjcV5HF77FhUHNo08/f/CxaQALoZKqRzzETPAFbOmEBMWSH1rOwdPuld+OhxO/rtuP1HB/sybPFjydi4ul4tXPtuHSqnkpV/dz6mP/0HeeT7e+P0DaNUq6lvb2Xvsy1WtzJuewR3L5iICL360hWP5fXMal0h5dT0PPfMOTpeLu1cuYPmCmSP+6i6Noa1OP68ZGak8/9O7UauUHMorpqb+7Eqqy8HoUeJLslos5B05QOGW9yhY/yZ5ezZjGdGM29vXj7T5y0lacB3BUXHkffYq5XvWMu7qW0hceB2VOQeoO7mP+mx37koQZCQsvB69fzCIIPcLI2naPHr7iuj7qTRaMpbdSnzi8LX5drOJ4rycgc/b6yoo27KamMU3M+Xa26nc+xknVj9Lw/5P6Ty5k9NrX+Lwa09Rf+oQoigSFB7FuCtvIOXKGxk/dwnevu5SIP+gENImzyAkOYPmhjoajmxj0nX3EBR19uQFgM1mpblucBbe5XRyOnsX2a88ydG3/krjwc+GpXUkX534yBBmTkjGZLGyPfskTpeL8pp6DuSc5lsLpxAZeuHFQ3VNrew4nEugjyezMi48wZQWF0l8RCDmXhtbDuR8qfpstUrF43etJDzQj7qWDn747BsYL2LRzBdhMlt44oX3ae/qYWJiJH948NsjL/na2GyDA7DRLJk7nWUzx+F0uTiWWzDy9GXhkgTmnA/+ScWav1O8Yw2le9dRseEVsl/9I50tg+9OTqeT3h4jpScPc+i/v0ew9TLjvieIGTcFQRBora/BUFmMf1w6/dn+oNhksn7wV8LnXAtdTdQd34VON9jIxm63kb9no3uF1ZSFI0bNIpZidzG/KIoU7l5P5MwlpGQuQJDJiZx5FSnXP4D/tKtQe/ogulzYOpqpOLgZ+5DSO7u1l/qSAra//xpNDe7SKkEQMHUbKXjvWcImziY44exucg67ndxtH7PtD/dRsW31wPHiA1soW/cyPY2VuKzu0b/O98IBYKy0tLVjtX7xW+ivm6GjC+sF/hAvllKp4K4V7hLPTdl5mMy9HDpVSrfZyiO3XXNRo/QTRRWU1DRx45JZBPlfuNY5IiSQaemJiKLI5kOnMJou0AzsAqLDgln9p4fQaVQcL6zg0WfeoPcS/H73njjN5kOnUKsUPHzLCvwvomdIP0tv75ilWVoN7cNSQA6nkw+2nX/RjiAIzJ3kftMcq3r4sXZJAnP8ghvQ+bnzqAqNFrWHD8baEo689TdK96yjZNdaTqx5if2v/ImqAxuJn7eSSTc9hKfXYDldcGwycQuuJybr6iHPDDq9nqnLb2H6Xb+gubGBor2bBibiqnIOULHlHUoO7yJl4lR0QzdbFQSaik7Q1tRIQ3UFzm4DUZPcXemsFjMH1n1A/Z6PMObvxWYyog2OJn7xTUy44YGBxTOiKHJ6y/vkvvssztJsfHzc+TSnw87pbR+hC40lbpZ76e1QoihSuHMtVTvex24xIQ9x9zruNLRRuecTdD6B6P1D3G8kggx9xIVHWmPB6XSy78Rp1F/i1vDrJIpw4nQJ5hF3TV9G1tQJzJ2YSGl1Izuyj/POxr3ce91CfPt+1xfy1me7UCoU3HfdwpGnRiWTybhpsbvmt6qhlY+3nH/14cWYkZHGo7dchVIhZ92eY7y/yb2rzljp6jLyuxfep8fcy+KpqayYd/G9se0OB7sOncA2JK34RblcLrYfyh3291ZQVEJjq7sC7Hz605pxUefeKeXrdEkCc1B0HBNufBAEGS6HnajFN7HkN68Se8UtNPeK1HfbsXqHMenGB5l33y+JmToP1ZAFJwDj5i5l/NKb0Iw43s8/LIrZtz9Gc84urH0jWmPFaVxOO9UnDyKTydBEDR+5Oq1WuspO0n5qPxFpU/DwdqcjdB6eLLn1PtJX/YDYa77HvB/9gysfe5pxV96AT9DgNjhOp5PEhdeTdP3DTP/uk2h07jraqtzDGOrKybzl4YFjQ1WcOkblvnXo/IMR5HKiM9x9YosP78KlUOM/ZRE9bY2AiDZlJsHRo6dBxlpNYytG01cze38pdHR2crKkFm+P0ffY+yJkMhlP9t2WP/rsO5TXt7JqiXsV6IWUVlSx9XA+y2aOO2v7pPOZlzmZxKhQRFHkd698hn0Mejs8ePMyxsVH0GOx8rN/vUdZhbvfzFh4/B+rySutxc/bk5efePBz1ZMbOroprTNc9B6U5/PGx5vx1KqHzV3kFRZTWF59wcC/LacMbw8d00bZSedy8IUCs7Grk866Cjpqy2ivLqG9upjO2jJaqyv7Wn4KhManMu7Gh1F5BVD66UscfO3PyEwGps67ggXX3sicpStx9JrJ//QVivZvwTHiB9nTbaS9tpyWkjxaSvJori4/q77UJygEv4QJnNywGlEUUfsFodTq8fX1BUTiMqYjUw1tRuSi4sguak7sxeU/vLOc0+VE5rLhoxZoOZND4Z71FO76jOJ9m6jN2Ufj6WN0VhfTbWjGw9fPvYdcWREn179N1Z6PmXHd3cj7dubutZgxNNXTfOYkh9a8StnWdwjLmI1neAIRk+cTHO7udufjqWfiqgfpLj2BSu9FXNYyrrzr0Yu6ZR6NUxQvqh7W5XKRV1zFo0+9SGTo6LWuXX231Bdzq9cfSFyiyJe5QxUBq+PCT+ByuTh5poIVjzzNlLS4C+4e8nklx8eQNSmFlvYuMsfFExt27r7g/aw2O7/776fI5TJuvOrius71EwSBh25wj7BbO4y8t2nvOW/1RVHE2Vd/e74GSP6+3rz86++SHhdOV7eJpT/4K4fzis75vP2BTBTF8+a5tx08wdqdh9GolPzuuzfg3zfXcjGq6hq5+1d/w8/Ha9TXePtFtie12x2s2bqfZ1ZvYUGme2n7IIH9J05z4nTpiONuTpeLT3dms/voab69ZBaa82zm+nX6QtPkpq4Oct/6M6LTBX2r62QyOQ4XqL28CZ+YRVzmFcRPySIkNomW6jJam+qRafQo+oKX0+mkNHsrltoz2K0WhFlXANBYU0XT8e20lp/GYenBZbO6c8wKNQExSWjip5A8eQZanR6ZXEHE1IUce/UP1JfOJWH21XR39xCUOA4Q8ItNRecfQk9j9cD33tNUBaJIUJj7FkYURepKCijf/gEWYzu+oVEYRC0ajRarzYq8q5HexgoEmQy5Uo3Syx8RAZulB6e1F3p7UOr0nNn+AXKlCqfNisXYidViRqVWo41MZcIND2BzgtnQSNz4wdu+uMzFmHu6CZq0gIkxCegDQs5Kg3we1Q0tlDUYQHRv3tk0ZOdhURTp6Oiiuq6RrSdK2bj/BBqVkqlpZ4/Oe3pMvLfDPVGanVdMfWMz4ecI4KIosu+ke/bfbLGyM/sE9666auRlF6WyupaCSvcS+y6Tbdj3D9De3kl5dS3bc8rZfCAHu8NJ1qS0YdeMBQ+dhqvnTOFgbjHXL5x+wdI8URT5cMt+Nh3IQalQ4OV58SPIfkP3Sfz3B1uZNTGVhOiza92P5J2hs9uEAJwsqWPKhPRRgxzA+OR4Vj/1GD9+9k12HM3nnide4Okf3MLyBWeXLe4+7q5C6TR2c7q0kgkpZ9drW+0O/v7uZnrMvUxKiSVrUspZv6PRdBm72Xcsn9c2HKCkpolff3f0drj/fOuTgf8f+bxOp5Om5jbOVNbx4e4cjuSX8P1r55y1WcLU8akYzWu5+7cv8Oxjt7J07vRhf1NvfrKFJ19bR3JMGD+45fJd5PWFlmS7nA52/eOndDdUDRzr75Mhutzvtr4xyUy/7YfohuwcMpTT4WDPG3/DVH2a9G89QPzEGbicTk6uf4uaAxv7xk/gHRGPT1QSKqWCnrYmegzN2O021EHReMekEpcyjrI9n2Gz9jLtlkfOSomU7dtI/rqzN3Zc+IuX8PYLoL7oJEUb30IbP4mMhdcMbLTqsFqw9Pai9/DC3NNNwa5P6Th9BL1/IMlX305QVALmnh6MnQZMxi66OtoR+0Yyaq2W4IgovLy9Uaq159w4dqw0txo4cPQE//p4Ly3tF+4j0O/WZfP45X2rhh3bvjebj3Ye48CpwRFHakwY91wzl6xpGXgNWfV4uriUo6eKeWX9ATqM7o125TIZ912TxVVzp5N4ke0m2wwd7Dh4jH98uIOunotPrTx0w0IeuO3SbHJbUV3LVQ8/Tc77f0E/ZIJ5KIfTSX5RMTsO5/He9mMDk2xT0xP4/nXzmT5p/AV/971WK4eP5/HkGxtoaB1s1h8a4Mvdy7NYkDmJsJAgSsur2J59gpc+3Ye9b0Tr6+nBfdfMYvaUCef9WTscTj7eupe3Nx+itqmVmePjuWZ2BvNmTqWguIx3th5i55HBUr20uEjuv3YOGWnJBAcOBtGte7J57O/vDnz+RXjpdWz81y/wH1LvXHCmlE0HT/Lmhv3nHNGPpJDL2fHyEwSN0ijpSO5pfv/fjymraSImPJjUyAB6LL0cPVOH2WJh/rQJ/PXRW/H9HBOWX7UvFJhFUaR47waKN78zsEuIUqsnaso8LD0ddFSVYOk0EJg4nim3/hDtkH7NA0SRhuJTOBGISB4/8K7f3d7Koff/g6nCvSpHptbgGZ5IzMQZ+CRMQu/lTWdrM46uVgy15bRUnsHV2YK1p4vEBStJXHj9sD8GU7eRPX95CJvFXa4niu4B+OTv/QmVDE59+C9Sr7qNyAkzho08DA01HF3zMmHR8UTNXIpPYAjtTXVUH9uNofgk8VlXETtj8Tnrkq0WM5Un9mFpayL5ilXohmxoWrJ7Leb2VlQ6D7RBUQQmTcDjc/QRGclssdD5BTpneXt6oB8x4jhfS8VAf9+BRTcA7Z1d9J4j1aHXafH2urgl2L1WK+0dF/+G0s/P1xuN+tzbB30ZoiiSnVfM7InnbpnpEkU6OrtGrWpRKOQE+rv3mTwfp9OJoaPrrDRdP28vT/Q6LZ1dxnNuf6XTafG5iJ+1y+Wi22TG1DevEBTgR0dX97D6/qF8vD3RaQcHOsbubnq+ZNWIXC4jOHD4YO18r6NzkcvlBAWc++frcDioqKmnpqUDQ5cJURTx0GqIjwgkISoc5Yh+LpebLxSYAcwmE4f/+zu66soHjql0Hkxc9V0CEifRtGMdBUc2MenG7xM2/uxbpws5sWUNjdnrsZvdIzGdfxDRs5aRMGsJihETBx2tzeRueBvjmWN4RyYyftVD+A9Zdr3t5acxlfT3XhbdOfCr70PeWIRJ6cX8G+8ZuBbAaGjB0NyAwwmF7zyFQq0l64d/x7tvZr74+AGK1jxPwtzlpC25Gdkoo6Ku+kryN7xJZ20ZE6+/n4jJg6vGasvOkPv673FY3S9GpdaD+KvvInXmxfX4lUgk/7/Jn3jiiSdGHrwYSpWKgMQMuprr6e1sBVHEabdRn3cIurqIWLySmKxlyNQ6tHpPivdt4ugbT1Gy+xNK966j7uRB6qvKUauUaH0Czsr1hCWkET/3GqJmLiVx0bdIXXg9ngHBtJbkYqgspKelAYXeC5VGi1bvQczEmXglT0WwW6k+tJmuthbU3v5odB447DbaitxbRvXXNqtl0NPexvQb7kc9Iv1ht/SQs/o5nFYT3iFRdNWX4zIbCUqdgkwmIyAsCl1YIrUndmPt7sIvOgmbzcrRtW+ikMvR+QTgdDooO7AZR68ZrV8wQYnjKTlxkLrcgwTFpaEJiKCz8jQuhx2Xw0ZHeR4ul0hg/NjnTCUSyTfLFw7MAGqdnuDUyYgaL0zN1Tht7lutjuYajM01RE9bgN7Tncex2+3UndyPw9yD02bF2t2BubGCpqITmI2d+EQno1QOr6eVyWSoNBqUKvdxY0cHOe/9k/q8g5g7WmmvKcU3bhwqtRpBEPD09iUwPh3vqCSaTu6j+sgO/OPS8fD0pD73IK6+TV1FEXo7W/H0DyJp7rJhXxMAmYLWijO05mdj7TTgctixmE0EJU8eSMt4B4bgGR5H2d7PcJh7CEmaQOmJ/VTv+QSnUkNY8gQsDheGklx0geGEpk4G0UXhptU05WcTkJCBb+oMOktzcDkdiE4nnbWliJ6BBIzYi1Aikfxv+VKBmb4eFcFxycTPWY4yIgWCEoiccSXJc5ejGZKfUnt40VaWj6VjeA7T5bBjrC/HKSgJSTx7xdxQWg9PtCExWDtbcbgg4erv4B8YhNPpoKfDgKW9iZIThyg9cRCN4KK9sghDRQH+cem0lObj6MszC4Lojs7+USRMG0wxGNuasNtsaD08cSm1tJeexGbpAVFEcDkISpyAZ+DgTLnOyxd9WDy5a15A7R9G3NT5VB/cSFvRCbxjx5E4dQ5hUxbi0HjhFxSM2sOL7tZGDKW5tJw+irHbSGBcGpa2elxOJy6nE2PlacKmLkJ1iXKnEonk8velA3M/QSbDPyiEqPgkAkPDzwoscrkCuYcvDbn7+66Xo9Z74bRZQRQxNVXhnTx1WAP60Xj5BxGekUVAymQUCiV1p49RsXc9Jfs30VFViF2UEZOYil9UAj6x6ZjaGmkoOIrNYsJl759gcKczbB6BpGXOd6/oO7iD8h0fofAOwjckHJ+gUHyjEulsbcbW3Y7L4cCu8SEybeKw78fpdFGxZy09bY3Ez7qS2tJCHF0t2E1GwibMQufhgX9wKIIgQyaT4xMRT0dbM5a2epydzXQ3Vg5UsgA47TZ0gRH4R8QO+zoSieR/x5gF5ovhFRhCVVkxjo4mBEEgevYyZMHx2FprcVgt9BoaCU6bhlwxuPV6P1EUEV0uRJeT1sY6yvas48ynL9FecRp5SDwTVtxB6vxriEqfgk94LJ7BEfhHJRA1ZT4NedmYWuqGPZ8+IBSNpw/xU+dQeuIgFVveJmXF3cSMczc/EgQBvV8QcTMW4puWSa9XKHK9NxGxw+s7rRYLlfvXY+vupK6xiYj4ZNrLC7A5nPgnTzlr1xaVRkvUhEzkWi86assQnc6RjfBQ670ISXP3DJFIJP97vnBVxhfV3lDN0Tf/isXQiFKrJ/nKm/COG09D3kGaz5x0F+hHxOMTEIxCpUYURRzWXrq7OjA01iKzdGETZYTEJhGUOB6f6JSzgt9IDcWnOPHW0zisfeVGokjE9MVY2hqYctsPObHmv4y76mb8wj5/brfH2MX2P9zjTo0AQeNn0VZ4FDQeTL3zp4THnbvvhc1qpaGyBHrasfV0YjMZMRm7kHsFkHHFdSiHrFo8H0uXAWPTF9w3TiL5HyUgEJg0AUEYveT16/SVB2ZRFGkoKSDnrT/jsPYiUyiJnbOcxIXXIzgdGNuayT92CE9LC9buLlwuJ3KVGqvWl6D4NGKS01Fo9Ki1+lHL1EbT3tzIvpf/gNg1uFN1zJLbacvZRWDieNRefqQsuv6iRqhWi4XT2z4kavoiAkIjEEWRXc/+cCAwyuQKXC4nKp0nmXf9FP+Yc9fBjsbpcOByuVB8jp7DHa3N1FcUj9wbQCKRnIdMLid1ysxzrkX4Oo1pYHa5XJjaGik/dRxj1WkcXW2IoojePwRtdBox46fh3bd7R2tzI3UH1tNcXoTTZiEsYxZpV9yIWnPuHX2dTifmtgbqyoqwijImZi0eecmo2lua2P/fJ3F1NA4ci7n2Aer2rEG09jDlrl8SHn/hAGo2dnLsjadxKtWEZsxBHxBCVFI6ZUf3Urj2RZz2wYUGcr03U+/8KWFxg1vHi6KIydCEo9cCGg+8/QMvOvhKJJL/HWOWY3Y5nZRlb6fgs1dpyT+Ipa0Ra08X1p4uelrr6W2pxanzJSTGnaPVe3gSnDKJwNSphKVPwzcoFKXeC7lCQVNtNYJcjmrorbwoUnZ0D/mfvER3fQVJs67EbOm9YBoDwGHppiFn70BVhghEZC7F2lSJaLeScsWqi0oblB3YTN3JfWg9PGk8sRu/8bPxCwzGMyCY7rZmupsGe3Kg0hIycQ7evoNLWk3dRlori8l57x/UFxyjp6kaVUAEOv3YdUeTSCTffGMyhhddLsqP7aVww2uYDO4mNACCXIHWN4DgrOuY89izjM+6AofdNpCPlclk+PgHEhAZh190MnaLiV3/eYKTbzyJ2dg5sG0UQEdbCyUbXsPRayF28U0U7fiYsi1vD5w/H7vFhK1nsHOVgIhGq8U3LBqZXI72IgKjw+GgveoMostJR00ZKr0XMUnuxSBKtZZxK+/BLzZtoGeIXK5ApR4++s9d+ypKvRf+kxZhNTRQdXgbJ1f/DVOnYdh1Eonkf9uYBOba08cp/PQld4VBH6VWT0jaNKJnLSM0OIiaQ1s4uuZlCvZtwTlKu8IeYyd7X34SU10JvgkTOb1tzcBkncPh4Mjbz2HvteATEUfZxtdpL84heNqSkU8zqrqSQndZHvSVyrnTB5rocdhtNrraL9whq9dswtxjBEDp5U/add9DMaQPrF7vwaz7f0PSkm+j8w9BrlCclZbxjUvn1HvPYWmrwyc8FgSB7vpySvZ8Nuw6yTdDS1MjHYYLv3Ykks/rSwdmh8NBV3UxrhFNWBxWCy1ncijZspq8ta9wZtsHODpaSJu5aNSOW9X5J7C31eF02GnJ209gfBo6L3dvivqSAiyNZQC0lJ7C0tVOwIQsYtOH1xSPptdiof7guoHPlTo9gkyO3W4nfsJU5EolnU3DS+lG47DbkGn0eI6fx8z7fk3UiHpmAKVSScqCa1nwyNOkX/891COa5idMnUNgyiQ6i47SWVc+cOdQd3THORvJSC5PZlMPhWuex9Ut3e1Ixt6YTf51GVqpLzqJqeo0hqZ6RKsJGSJOhx25UkVA2gzGLVmFWjt6r9qqIzsoyd5OUEwivumziU5y70gsulzkb3ib8n3rQBBQ673wSZxIxvLb0fftQHIutl4Lhz76L4a8vQOlwp6hMVjam4hZ+RDjp80ke+3b6BQiGctv+0rKZkSXi7KcbEzVRfQYmjB1G+m1mJl+508Ijfz85XqSr8eZvRvQe3gRMdm9R6BEMpbGLDD3E0WR7s4ORKsJRPeCELlChS4gdNSRcj+bqRubw4ney3vYC93pdFJbeJKuljp8/ALxDgxBGxB2VuOh0eRt+YDa7M3ofQPprK8AIGzyPNpK8gicfzPT519Bt6GZY6v/zrhVDxIU+tXu/+Ww2zGbuuk1m/HxC0B1nooUydiwmEw05B2grTQPp82KxtufgAlZRA5pPUtffXpjzh4S51877PH98g4fIMhDReg49359ALXlpXj6+ePjO3wT1o7ackS5Er+wqIFjbRWF2FAQNkqde2tDDfXHdmFuqUWmVOIXlUTwxHl4+43eYB6gtbYSmVqLf9BgV0XJN9eYDxEFQcDL1w/vkEi8Q6PxCY/DMzjivEEZQKX3xMPb56zRh1wuJ2b8VDIWrSR60mx8IuLPG5RdLhdGQwtb/vsXKnZ9TMKSWwbOCYIM/6gE9L4B6GTufLjeN5Cg5Enkr34Go6Hloht1jwWFUomXjx9BYRFSUP4KWM0mDr75DG2leWhTZxM691vIAqIo2/IuxQe3D7vW3NNN5ZGdw44N1dxQS1v56WHH6qrKOLPhTayW4c3+jU3VdDYPT5d11pbTWje40QR9r92SnEPkvv0MvS6B4Nkr8Z64GEtXO0fe/CudLYPlnkO5XC5qDm2mdt+6r/T1K7l0xjwwf11MPd2U5R3l1Po3OfDCb7EUHyF84hziJmdhanc3ThLkCtTBMXiFRiGzuHfSlclkJGRdhVd0Gsfe+itFB7dj6nZP8l2IzWbF0NJEdVkxFUUF5B87RP6xbPKPZVNw4ghVJUW0tzafdw81yVfDZrNx4PW/EBCbwtRbHmXC9NnEJqcxceFyJt/yCKLDNiZBzVCeT1X2lpGHL0pbVTG1u95n8k0PMWPlHcSnjSd14lQyrruX9CU30mt2l3uO1NVch6mjjdbKItoaakeelnwDjXkq46vgcjrpbG+jobqSlqoSVO2VdNaUo/b2RRM9DldTBUqdBzPufBy5UsWnj98wsNBl8U//xf5Nn6Bpr2T67T8eGKG7XC5KDu2kbNu74HLhF5OEyzcSu1KPIJPRZWgjWK9AZe/B1N6Cqb0Ju8WCKLrcfTxE3KsU5UpUHp4ICNjM3SCKKDVa/CITEYPjiZs0k6DQ8JH/JMklVnX6JGc+fp4rfvHCwKa5Q4miOOxuraWhjty3/8KVP/3nsOv6bfvkPULlvYy/9q6BY4d2bsZZk4+j14x30lQmLVoOQPWxXTgVGuImzRq4tmzvekyCmoy5V0Lf3EPe+jex6wOZttj9uIuVt30tKrWGts5OAjw0pC5Y6d6mR/KNdUkCs8Nup6u1EWdPOx3NDdRXlmPp7sRHI0fo+3I2J5gbyxE9A6B/0k0mw1Pvidxlw9xlQCaTo9J7ISg1WBwiNksPCqUSl9WCRqdD5+GFh38wgk8IPuFxaOWQv+NjVILIpBsfQq3R0FBZypHnfw4CRC79DlMXr6C1qZ6c1c+ReedP8A4IGva9GzvaqS04hr2lGqOhBYvZhMXUg07mAkR8Y1KxB8YTGhkzUKds7DQg9rTjaG/AUFuJS6kmccYi/GNTsVp7aaqrQWU20FlXTnNxLh7+wYgeAcSNn4I+NAbf4PCzNgqQjK2qI9vpqCll0qoHRp4a1RcNzJr2auIWXMfx9/9N4twVRE2YRvWx3RcMzHablX1v/I2sWx5EPdpWbOfQazFz/O1nmbDyHpRqDUfX/JesOx5DPqK3ueSbZUwDs8XUQ9Hh3ZjKcjAbO/H0D8TU0oAixD1S9PYLRKZQIlMoKC3Mp/noVjJWPYhySM64p62Rsi3v4BWRSPiETDx8/REUKmxO97epUKqQyWUoVWrUGu1AQCs8uJ26/Z+hDk8m87o7UXt40VyaT+7aVzA116Hx8mHRT/89kJ/e+vzvSJu/jMj0wV2rhxFFrNZe7FYrVmsvapmIw2qh22iksaIEpVpN8szFw/byA7D0dGNub6L08G5EUwdxV95CcHgkANbeXk599hpJc5dRV15Md3keXc31hM9axrgs9y7hkkuj+uhODBWFTL754ZGnRvVlAvOkVd/DUF/NqQ1vk37N3VjqzlxEYLax781nmf3tB9B4nL/17VDFuz+j5ugOIibPRQDq8w8TMedakof0GZd884zZkmxzdxf7X/0zppozREyaS8bKu/GNTceh1JF53Z34hESg8fZD7emNU4TSja+SkLWMyHFT0Hl4otJo6W6qpTX/EEkr7iEpcyE6nwAUGh06L190Hp7oPDzR6HSoNVqUShUul5O2uioK1r5C7aFN+EUnkXXnj1Co1HQ01lG+51MIiKK3oZzACVnETJw58P3KlCpO7/qMqPHTUYy2HFsQUCiUqDQadHoPVDpPNF6+eAeGEJ6UTo+5l+p9n6ILCEXbt0sLgFKlRuftT1jqJABOvvcPFN6B+ISEo1AqMTbXoguJJTo1g4iJswlOn4HG2x+9x4VXH0q+uHajmZr964ictgjFKKNJl8s1LJVh6jbSdOog8VlXDbuuX3lRAZ4yB8Ep7t8zQF1lGQpLF6HpU9F5+aDRaDn96cuovf1R6LzwDXW/QQO0V5dgFxSERMdD31yHqaWOxoZ6wkbp2zIy1QLQ3dVB/icvEzpuOoIAouhCpfeiKXcfkVMXXnDCXXL5GrP7Z4VSScr8a5j70J9InrsMjU5PW0UR0akThl1n67WQt+Ft8AwidII7UNrtdgp3r6M6N5vkJTcTGBIKQFtbKyc+fYP2pvphz+F0OqktOc3JT/5L3kfPow2Jwjctk+Sl7gqMjuZ6Cte/SuqSm8lceQfKwEi8At3P2S88JYOQ8Ciy3/wbbfVDelxcpMRxE0lcsJLSfZvoMZ69w7NMJiNq8hz8pi3hzIbXqco/DoB/2gyKd67B3tfwyNPHl8AhG8dKLo2ohGR0kSnkb/0Qe3/71z5t9dUUbHkfcZQVqV9GcNoUorOWU3v03NUd/QRBIDR9Oh0nd9JcnHfWRGR1bjZ1JUOrQEQaC46iikpn/Io7SVt6C2lLb2H8NXfh1HhTk5c95FrJN82YjZjlCiU+IRED+/MBeIdEohuxCOT4hncx1FVx5fd/PbDHX0d1MU25+8i87VFUQ9IaHp6eCCoNhWtfotUqQ6FUkHfkAFVb3qR81yeY2pqY9O1HiZ2cRW9rHZETZ+F0Ojm99QPCMpcRFB2PQqFAqfOk5uAG4mYPjn4UShVhaVNoaaynfPNbtHdb8Ak+d9laf312d1cH5p5uVGo1em8/gpMmAALKETt392s6shX/pEmUb3+PwIy5+AcG01RTga2zBd/wuLNGQZJLQyaXEzVxJsUHttJ4bAf1RivdXZ1U5hykavt7BI+fhV94zMD1pm4j9ce2c6qinqLc45QXnsIvMHigadaFRsz0BVu/iFiMJjM6L198Qgbr5EeOmAF03n7IA6I5veZ5mhrqMTmgoaqc2r2fUJ13hJS5Vw/8fTgdDk7v+pTpK25DNWTRlkwmxzM8gcoDmwhJm4pilIlOyeVvTHPM59NcWUzR7nVYDY34p0xl6orB+uL64lPIlWpChrbIdLkwtDZja62l+vgeDOUFKHxCCIiIoaepGqcIk7/9A3yDw8nbvZGAyDjCE1Lpam2keO9Gpn3rHgRBoLm6jIK9m5CZ2rE6XMy68X48g8IHAqIoirTVV2MoOk5jcS4OsxGF1pNel4BeIaDS6uiy2JHLQKPRIJcrUKpUmHqMiKYuVAGRxE7MxCcm5axmSN3GLnLe+DNZD/yB42v+i0ajZvyKO3E57BTs+IRxV3xr9DSK5JKx9lpoK8mjq64cp8OOysMLn4SJBEXGDnuT7DWbaD1zAldfqaNcoSQwYRxqT3ebgIaaSrQ48I1KHHhMS2MdCpsJv+jB1zGA1WLC6XCiG9IJ0dhUi0OQ4Rd8doVOR0sjrWdO0NvZikwmxzs0Gr+kScM6KYouJ02lBQQnpCOTD/Zs6ddaVoBvZDwK9blr/iWXr0semJvra2k4tBFDTRlRs5bh5eNLd3sribMGJ7v683uCIOB0OinJP4m5KJu2mjL0wRF4RKcTn5aBTOtBt9FIzptPk3HD9whPHg/AkTf+wrQ7foxMJsPQVI+1u5OwxHTaq0spO3Wc9LlLkSkUHH7pd9gsJiImzkYdM56wmAQEwd2vuaW8kI6CAzitFgiMITAmmZikNJRqDQ6ZEoVShUqtRiaTuXtt2Kwc3fQRarUaR2MZLlEkacXdBIUMbtZalHscQ2keWavuwWzs4uCrf2TqLY/iGxxGr8WMWqOVRswSieQslyQwW8wmCg/vobngCEJ3C37hccReeQtBYRHUFBxHgYuwIUtZXS4Xlk4DlfnHqT68BaxmIjOXEDtjMZ7e7hEKgLmrnWPr30VlNzH9jh8hlytobayn+vA2pl43ODtO32Tk8c0fMe3qG9H2lR/teuYxgpInUldwjN6OFkSXE6VGR2DSBMSwNJImTMEvMPisGlC7zUpvjxHsVhAENN7+KNUaGgpPoPX0xiskioJtH1J3ZDtxS24lacZC5AoFZw7txNBtYfaV7rrUHa8+w/jZi4bd/kokEslIYzb5N5LcaScuYzpTb/0h0+/8MUFh7vyaoboUldfgmn+Xy0Xeto/JW/sK5vZmFHpfpt7+EyZcecNAUO40tFK45T1Obf0IY/ExdOEJyPtu34xtTVj1AQPPB2C1Wjn58cuMm71oICg7HA6Uei/GLb+DzHt/RdLiVSi1emQKJQq1nmC9go62VqzW/vagYDGbKcneTuGONRzdtZniE9k0VZYMrAzU6DxoaaxHrlSRdsWNJF51O9X711FXnO8+Lxs+k+4fEUtT7fBluBKJRDLSmE3+DaVUqgiJTyEgJgm9j/9AcOowtFFzcAPxWVejUCixWXs5/s6zmFrrmXzzwyg9ffHy9CBqwoyB5zLUVVKy6S20idPIWLCc6mO7cAUnEZ3gzuP1ttSAUktQX60wQNOpQ8i8Q4hKHxyZmoxddNWVEDY+E43eg8D4dASZDI/gSETfcLrKcqnZ9ynl+z6lraqMusKTFH76Et6RiaQuWEnC+MmEJabjHxGLpq+dp80l0JCzj7C0KcgVCvwj4/CMTMIlyPH2C6CjvgKj2UZU3/fa3dqAudtIeJI7BSORSCSjuWQj5pFcLhcFm98lZvYy1BotostJ0eZ3ETR6ptz2Y3RePpTv30RI2rSBxzSX5lOavZWUFXeRMnEqgkyGTC5HJx8sa3IO2RGFvomWupoqUmfOGzgGIFcq3XvtDRE9cylmQxMTZi8i8zs/5Ypfvkz6bb8gPH0KOr0eZXA87ZWFHPv4FWpzs+npGtwFBcDbzx/P0Eiq8w4PHAuOTiAywV2HahE02DsHN4ANS55A4rTh35dEIpGM9JUFZlEUiZo8l4hx7sBbnHuc9sZaJiy/E08vLxqqK1B6+eHRt0ded3sbtSf2Mmn57fgEhiCKIqf3bMBm7kFhGmxOLlep6e0d7OZl7mx3l9mN6K2s1emxGDuH1aqq1GpaRQ/aW93BU63REJeSTsyMxUy45jvMvevHRIybRpfVQX3uAQ6/+nvydm8a1pQoIfMKqopOYWwbDMD9fEMjkHcMNpXx8AvCJ3hwclAikUhG85UFZrlcTnTaRORyOWZjF1WbXiNm2ny0nl7YbVYMpw4QOXH2wPVNxScJychCrdNj7e0lb/OH2M0m/LJuwNhYg9Ph3vGj26Wkc8gClKJjB1HiwjVisYAgCOjD4misdvdl7qf29MYyStcumUyGVu+BXKlmzvIbmXHn40z41oP01p3h0HvPuxeliCIKpZIpS75F5cmDZz1PSHgUdnMPFtPZzy+RSCTn8pUF5qGqju5EkMsITpkMfd2xGvKPEB4zWGxvqK3APyIWURSpydmHSu9B2uLrmDhrHr29Zrr79unzDwpB3TXY69bVUU+3ycSZ7R+dlXoImTSPjoqCYauqLhw03dcKgkBQdDxTvv0woSkTOfnRC9TmZeNyufDw9cM/Io7cta9i7HS3EwUQZDJCZ1+Dve9NRCKRSC7GVx6YTd1GGopy8JmwAK3eg5PbPkUjOAmISxloSNTT1YlWIUPr6Y3Z2Eld3iGSZ1+JSqVCo9XhExKFy+KujAgICcNiaBxIRygESJl/DVGzrqJkz2fDUgzhMXE0Nzdi6dtUFSBCJ+KyW8+9HFcUcdh6B0bgCoWS+KlzSb3++5Ts+Iim4lwEQUZE6kSiZ1zBsdV/p6OxZmBhQlrmfLyGlPxJJBLJhXzlgdlht+PSejNh/tW0NzfQXZZD/PyVyIbkhJVqNeF9aY22+ir8wqM5vn71wHm5fzidzQ0DnydecRPdff0qBEFALpfj4elF8rwVlBzcSkvJKRBFZHIFUQmpVB7bPfBYs6GR2vyjFO3bSEfz8J4cAA6bldwdn1G8bxNttYNpkIioaBKX3saZLe/TUtO3bVVCKuOuvpXiA1upOZ0z5FkkEonk4n3lgdnL15d5tz6IVu+Bqb4cfWom2r7yM7OpBwC1RktAXBoAhpI8QiYvwGZ30NroDpwRsYnUVQ0GyahJWUTGJgCg0OqxmN2TgXofPyYsWUX1if0YGmsRBIG4KVlEZAy2X3TZbGReezuxk7I4s38zhrrKgXMASq2emClziczIpKU4j9zdGwfORaZNxjcqnsL1rw7sch0cm8SUlXcSmTK8eZNEIpFcrK88MAuCDLVWB32tN5My3CsAZUoV1aVFw651OhyYmirxDQwmafaVdFcWAKDS6pBZ3UGcvom6/jRIm02GbUhZnEqjJTbrKmpz3d22ZHIF3v6DzfEFAZQqFVpvXzKuvIHS/RtprSoeOC/zCqSpphwP3wDSFl+Hp48/ZdnbEF1OBJmMkOlL6GlpoL22bOAxSqUKudQDQyKRfEFfeWAeKiRtykB5nOAdhLWhfNj5xtpqVFoPVGoNQSHhdLY04HQ6kCmUKMXRJ9TkuBD78s/9fMOiUeCkvMi9Iq9fj7ELp8Mx8LnOy4f0JTdRsX8ThoYaAPzDIhGby7H1rQiMy5iOAFSecrfxDImIxjs4HFunezJSIpFIvqyvNTArFMqBVYG+MWnYDIN5Y4DWxrqBbl4I7lpo0SW6/ztig1OX00H+3s2ouxqwd7cPOyeXy/FNn0nzwU+HVWQ0Fp/CaesddszTL5DImUupyz8KfWkV7+TpFB3c5m5WLpMRPnkuTbl7oS+nnXHLj/COSx94DolEIvkyvtbAPFRIZDQJc5eNPDy4d5kgI376AhRKJb3dRnoZvjtDZd5R1IKLKbc+Rme36axG4+HRcYgaL8w93dDX5Mjc3oTKyw/TiEb3ARExCPrBPtJJ0+Zg7+6gpaoEcLf/jM5aMXDey8cXLx+/gc8lEonky7hsArNKrT6rj61ao8Xa7a4LFgQBn/BYAMpyDuIXETfs2uaSXILHzUDr6Y1OLg7UHw+VefMD6Dw8AehsqCYiZQIxi27CUD+8sZBKo2XcrAUDn8vlcpLnXEXZ3nUYWlsACE9IHfIIiUQiGTuXTWAeTUJ6BrrAweZEALWFJ+muyCMiJWPgWH11JR5aDd6+7oZJ6qAocnesG/Y4+pqd96dOKorykeu8CQ6LwGJopKevY1y/kbtWe/oFkrrsDlRDdmiRSCSSS+GyDswqtZqk+dcMfG4xmyjZshrPpKl4h0YPHK8+dQSZb+hAH+WwhFSsdcUYmpsGrhlJaWpDrfdEodag8wvm+LvP0TFib8GR/AKDh/WHlkgkkkvhsg7M9G3y2k8QBGIzr2DaNbcjVwxup+PhsiDoB3O8crmCqEU30lGWe1auuZ9o60Wt1iAIAlHpk4mbdx0Fm96hp0OqrpBIJF+vyz4wD6XR6oibteSsdII+IoGwKHf+uV9YVCyCd8hAmdtIar0nsiHbu0elTCBjxZ2o1KNvxiqRSCRflUuytdRXTRSH7xTSb+hegiM5HXbk0g7CEonkMvT/IjBLJBLJ/yffqFSGRCKR/C+QArNEIpFcZqTALJFIJJcZKTBLJBLJZUYKzBKJRHKZkQKzRCKRXGb+D1uz9mLriNN4AAAAAElFTkSuQmCC" alt="Life Varizes Clínica" style="height:52px; background:#fff; border-radius:8px; padding:4px 10px; display:block;">
   </div>
-  <div class="header-date" id="headerDate"></div>
+  <div style="text-align:right;">
+    <div style="font-size:13px; font-weight:500; opacity:.9;">Cálculo de Custo Cirúrgico</div>
+    <div class="header-date" id="headerDate"></div>
+  </div>
 </header>
 
 <main>
@@ -285,17 +291,11 @@
   <section>
     <div class="section-label">Dados do Paciente</div>
     <div class="card">
-      <div class="field-grid field-grid-2" style="margin-bottom:14px">
+      <div class="field-grid field-grid-3" style="margin-bottom:14px">
         <div class="field">
           <label>Nome do Paciente</label>
           <input type="text" id="nomePaciente" placeholder="Nome completo">
         </div>
-        <div class="field">
-          <label>Data do Relatório</label>
-          <input type="date" id="dataRelatorio">
-        </div>
-      </div>
-      <div class="field-grid field-grid-2">
         <div class="field">
           <label>Telefone / WhatsApp</label>
           <input type="tel" id="telefonePaciente" placeholder="(61) 9 0000-0000">
@@ -303,6 +303,23 @@
         <div class="field">
           <label>Endereço</label>
           <input type="text" id="enderecoPaciente" placeholder="Rua, nº, bairro, cidade – UF">
+        </div>
+      </div>
+      <div class="field-grid field-grid-3">
+        <div class="field">
+          <label>Data do Relatório</label>
+          <div class="input-prefix" style="background:var(--blush); pointer-events:none;">
+            <input type="text" id="dataRelatorio" readonly
+                   style="background:transparent; color:var(--muted); font-size:13px;">
+          </div>
+        </div>
+        <div class="field">
+          <label>Data da Cirurgia</label>
+          <input type="date" id="dataCirurgia">
+        </div>
+        <div class="field">
+          <label>Local da Cirurgia</label>
+          <input type="text" id="localCirurgia" placeholder="Ex: Hospital Anchieta, Clínica Life Varizes…">
         </div>
       </div>
     </div>
@@ -353,12 +370,13 @@
 
   <!-- 4. EQUIPE E VALORES/HORA -->
   <section>
-    <div class="section-label">Equipe Médica — Valores por Hora</div>
+    <div class="section-label">Equipe Médica — Identificação e Valores por Hora</div>
     <div class="card">
       <table class="team-table">
         <thead>
           <tr>
-            <th>Profissional</th>
+            <th style="width:28%">Profissional</th>
+            <th style="width:26%">Nome</th>
             <th>Valor/hora (cirurgia)</th>
             <th>Valor/hora (consulta)</th>
           </tr>
@@ -366,6 +384,7 @@
         <tbody>
           <tr>
             <td>Médico Cirurgião</td>
+            <td><input type="text" id="nomeCirurgiao" placeholder="Dr(a). Nome" style="font-size:12px;"></td>
             <td>
               <div class="input-prefix">
                 <span>R$</span>
@@ -381,6 +400,7 @@
           </tr>
           <tr>
             <td>Médico Auxiliar</td>
+            <td><input type="text" id="nomeAuxiliar" placeholder="Dr(a). Nome" style="font-size:12px;"></td>
             <td>
               <div class="input-prefix">
                 <span>R$</span>
@@ -391,6 +411,7 @@
           </tr>
           <tr>
             <td>Técnico / Instrumentador</td>
+            <td><input type="text" id="nomeTecnico" placeholder="Nome" style="font-size:12px;"></td>
             <td>
               <div class="input-prefix">
                 <span>R$</span>
@@ -424,7 +445,91 @@
     </div>
   </section>
 
-  <!-- 6. MATERIAIS E INSUMOS -->
+  <!-- 6. TAXA-SALA -->
+  <section>
+    <div class="section-label">Taxa de Sala</div>
+    <div class="card">
+
+      <!-- sub-rótulo cirurgia -->
+      <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;">Cirurgia</div>
+      <div class="field-grid field-grid-3" style="margin-bottom:20px;">
+        <div class="field">
+          <label>Horas de sala (cirurgia)</label>
+          <div class="input-prefix" style="background:var(--blush); pointer-events:none;">
+            <input type="text" id="horasSala" readonly placeholder="—"
+                   style="background:transparent; color:var(--wine); font-weight:600;">
+          </div>
+        </div>
+        <div class="field">
+          <label>Custo/hora sala cirurgia (R$)</label>
+          <div class="input-prefix">
+            <span>R$</span>
+            <input type="number" id="vlhSala" min="0" step="10" placeholder="0,00" oninput="calcular()">
+          </div>
+        </div>
+        <div class="field">
+          <label>Total Taxa-Sala Cirurgia</label>
+          <div class="input-prefix" style="background:var(--blush); pointer-events:none;">
+            <span>R$</span>
+            <input type="text" id="totalSalaDisplay" placeholder="0,00" readonly
+                   style="background:transparent; color:var(--wine); font-weight:600;">
+          </div>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid var(--line); margin-bottom:16px;"></div>
+
+      <!-- sub-rótulo consultas -->
+      <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;">Consultas</div>
+      <div class="field-grid field-grid-3">
+        <div class="field">
+          <label>Horas de sala (consultas)</label>
+          <div class="input-prefix" style="background:var(--blush); pointer-events:none;">
+            <input type="text" id="horasSalaConsulta" readonly placeholder="—"
+                   style="background:transparent; color:var(--wine); font-weight:600;">
+          </div>
+        </div>
+        <div class="field">
+          <label>Custo/hora sala consulta (R$)</label>
+          <div class="input-prefix">
+            <span>R$</span>
+            <input type="number" id="vlhSalaConsulta" min="0" step="10" placeholder="0,00" oninput="calcular()">
+          </div>
+        </div>
+        <div class="field">
+          <label>Total Taxa-Sala Consultas</label>
+          <div class="input-prefix" style="background:var(--blush); pointer-events:none;">
+            <span>R$</span>
+            <input type="text" id="totalSalaConsultaDisplay" placeholder="0,00" readonly
+                   style="background:transparent; color:var(--wine); font-weight:600;">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. EQUIPAMENTOS -->
+  <section>
+    <div class="section-label">Taxa de Uso de Equipamentos</div>
+    <div class="card">
+      <div class="field-grid field-grid-2">
+        <div class="field">
+          <label>Valor da taxa de equipamentos (R$)</label>
+          <div class="input-prefix">
+            <span>R$</span>
+            <input type="number" id="vlEquipamentos" min="0" step="10" placeholder="0,00" oninput="calcular()">
+          </div>
+        </div>
+        <div class="field">
+          <label>Descrição (opcional)</label>
+          <input type="text" id="descEquipamentos" placeholder="Ex: Laser EVLT, ultrassom intraoperatório…">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. MATERIAIS E INSUMOS -->
   <section>
     <div class="section-label">Materiais e Insumos Cirúrgicos</div>
     <div class="card">
@@ -480,6 +585,18 @@
           <span class="rl-value" id="rTecnico">R$ 0,00</span>
         </div>
         <div class="result-line">
+          <span class="rl-label">Taxa de sala — cirurgia</span>
+          <span class="rl-value" id="rSala">R$ 0,00</span>
+        </div>
+        <div class="result-line">
+          <span class="rl-label">Taxa de sala — consultas</span>
+          <span class="rl-value" id="rSalaConsulta">R$ 0,00</span>
+        </div>
+        <div class="result-line">
+          <span class="rl-label">Taxa de equipamentos</span>
+          <span class="rl-value" id="rEquipamentos">R$ 0,00</span>
+        </div>
+        <div class="result-line">
           <span class="rl-label">Materiais e insumos</span>
           <span class="rl-value" id="rMateriais">R$ 0,00</span>
         </div>
@@ -491,7 +608,164 @@
     </div>
   </section>
 
-  <!-- 8. OBSERVAÇÕES -->
+  <!-- 9. FORMAS DE PAGAMENTO -->
+  <section>
+    <div class="section-label">Formas de Pagamento</div>
+    <div class="card" style="padding:0; overflow:hidden;">
+
+      <!-- Cabeçalho da tabela -->
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; background:var(--blush); border-bottom:1px solid var(--line);">
+        <div style="padding:10px 16px; font-size:10px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--wine);">Modalidade</div>
+        <div style="padding:10px 16px; font-size:10px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--wine);">Condições</div>
+        <div style="padding:10px 16px; font-size:10px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--wine); text-align:right;">Valor</div>
+      </div>
+
+      <!-- 1.1 Pix / Dinheiro -->
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; border-bottom:1px solid #F0E8EA; align-items:center;">
+        <div style="padding:14px 16px;">
+          <div style="font-size:13px; font-weight:600; color:var(--ink);">À vista</div>
+          <div style="font-size:11px; color:var(--muted); margin-top:2px;">Pix ou Dinheiro</div>
+        </div>
+        <div style="padding:14px 16px; font-size:12px; color:var(--muted);">Sem acréscimo</div>
+        <div style="padding:14px 16px; text-align:right;">
+          <span style="font-size:16px; font-weight:700; color:var(--green);" id="pgPix">R$ 0,00</span>
+        </div>
+      </div>
+
+      <!-- 1.2 Cartão à vista -->
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; border-bottom:1px solid #F0E8EA; align-items:center;">
+        <div style="padding:14px 16px;">
+          <div style="font-size:13px; font-weight:600; color:var(--ink);">À vista no cartão</div>
+          <div style="font-size:11px; color:var(--muted); margin-top:2px;">Crédito ou Débito</div>
+        </div>
+        <div style="padding:14px 16px; font-size:12px; color:var(--muted);">+ 3% taxa administradora<br>(÷ 0,97)</div>
+        <div style="padding:14px 16px; text-align:right;">
+          <span style="font-size:16px; font-weight:700; color:var(--green);" id="pgCartaoVista">R$ 0,00</span>
+        </div>
+      </div>
+
+      <!-- 2.1 Parcelado 6x -->
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; border-bottom:1px solid #F0E8EA; align-items:center;">
+        <div style="padding:14px 16px;">
+          <div style="font-size:13px; font-weight:600; color:var(--ink);">Parcelado — até 6x</div>
+          <div style="font-size:11px; color:var(--muted); margin-top:2px;">Entrada + 5 parcelas no cartão</div>
+        </div>
+        <div style="padding:14px 16px; font-size:12px; color:var(--muted);">
+          Entrada 25% (Pix/Dinheiro): <strong id="pgEntrada6" style="color:var(--ink);">R$ 0,00</strong><br>
+          + 5× no cartão sobre 75% (+ 5% taxa)<br>
+          <span style="font-size:11px;">Total a pagar: <strong id="pgTotal6" style="color:var(--wine);">R$ 0,00</strong></span>
+        </div>
+        <div style="padding:14px 16px; text-align:right;">
+          <span style="font-size:11px; color:var(--muted); display:block; margin-bottom:2px;">5 parcelas de</span>
+          <span style="font-size:16px; font-weight:700; color:var(--wine);" id="pgParcela6">R$ 0,00</span>
+        </div>
+      </div>
+
+      <!-- 2.2 Parcelado 10x -->
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; align-items:center;">
+        <div style="padding:14px 16px;">
+          <div style="font-size:13px; font-weight:600; color:var(--ink);">Parcelado — até 10x</div>
+          <div style="font-size:11px; color:var(--muted); margin-top:2px;">Entrada + 9 parcelas no cartão</div>
+        </div>
+        <div style="padding:14px 16px; font-size:12px; color:var(--muted);">
+          Entrada 25% (Pix/Dinheiro): <strong id="pgEntrada10" style="color:var(--ink);">R$ 0,00</strong><br>
+          + 9× no cartão sobre 75% (+ 10% taxa)<br>
+          <span style="font-size:11px;">Total a pagar: <strong id="pgTotal10" style="color:var(--wine);">R$ 0,00</strong></span>
+        </div>
+        <div style="padding:14px 16px; text-align:right;">
+          <span style="font-size:11px; color:var(--muted); display:block; margin-bottom:2px;">9 parcelas de</span>
+          <span style="font-size:16px; font-weight:700; color:var(--wine);" id="pgParcela10">R$ 0,00</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 11. RESUMO DO PACIENTE -->
+  <section id="secaoResumo">
+    <div class="section-label">Resumo para Registro</div>
+    <div class="card" id="resumoCard" style="border:2px solid var(--wine);">
+
+      <!-- header do resumo -->
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; padding-bottom:14px; border-bottom:1px solid var(--line);">
+        <div>
+          <div style="font-family:'DM Serif Display',serif; font-size:18px; color:var(--wine);" id="rsNome">—</div>
+          <div style="font-size:12px; color:var(--muted); margin-top:3px;" id="rsContato">—</div>
+        </div>
+        <div style="text-align:right; font-size:12px; color:var(--muted);">
+          <div id="rsDataCirurgia">—</div>
+          <div id="rsLocal">—</div>
+        </div>
+      </div>
+
+      <!-- procedimento -->
+      <div style="margin-bottom:14px; padding-bottom:14px; border-bottom:1px solid var(--line);">
+        <div style="font-size:10px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">Procedimento</div>
+        <div style="font-size:13px; color:var(--ink);" id="rsTipoProcedimento">—</div>
+        <div style="font-size:12px; color:var(--muted); margin-top:2px;" id="rsCirurgiao">—</div>
+      </div>
+
+      <!-- total -->
+      <div style="margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--line);">
+        <div style="font-size:10px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--muted); margin-bottom:8px;">Valor Total</div>
+        <div style="font-size:28px; font-family:'DM Serif Display',serif; color:var(--wine);" id="rsTotal">R$ 0,00</div>
+      </div>
+
+      <!-- forma de pagamento selecionada -->
+      <div style="margin-bottom:16px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--muted); margin-bottom:10px;">Forma de Pagamento</div>
+        <div style="display:flex; flex-direction:column; gap:8px;" id="rsFpgContainer">
+          <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; padding:10px 14px; border:1.5px solid var(--line); border-radius:8px; transition:border-color .15s;" class="fpg-opt" id="fpgLbl1">
+            <input type="radio" name="formaPagamento" value="pix" style="margin-top:2px; accent-color:var(--wine);" onchange="selecionarFpg()">
+            <div>
+              <div style="font-size:13px; font-weight:600; color:var(--ink);">À vista — Pix ou Dinheiro</div>
+              <div style="font-size:13px; color:var(--green); font-weight:700; margin-top:2px;" id="rsFpg1">R$ 0,00</div>
+            </div>
+          </label>
+          <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; padding:10px 14px; border:1.5px solid var(--line); border-radius:8px; transition:border-color .15s;" class="fpg-opt" id="fpgLbl2">
+            <input type="radio" name="formaPagamento" value="cartao" style="margin-top:2px; accent-color:var(--wine);" onchange="selecionarFpg()">
+            <div>
+              <div style="font-size:13px; font-weight:600; color:var(--ink);">À vista — Cartão de Crédito/Débito</div>
+              <div style="font-size:13px; color:var(--green); font-weight:700; margin-top:2px;" id="rsFpg2">R$ 0,00</div>
+            </div>
+          </label>
+          <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; padding:10px 14px; border:1.5px solid var(--line); border-radius:8px; transition:border-color .15s;" class="fpg-opt" id="fpgLbl3">
+            <input type="radio" name="formaPagamento" value="parc6" style="margin-top:2px; accent-color:var(--wine);" onchange="selecionarFpg()">
+            <div>
+              <div style="font-size:13px; font-weight:600; color:var(--ink);">Parcelado 6x — Entrada 25% + 5 parcelas no cartão</div>
+              <div style="font-size:12px; color:var(--muted); margin-top:2px;" id="rsFpg3Det">—</div>
+              <div style="font-size:12px; color:var(--wine); font-weight:600; margin-top:1px;" id="rsFpg3Total">Total: —</div>
+            </div>
+          </label>
+          <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; padding:10px 14px; border:1.5px solid var(--line); border-radius:8px; transition:border-color .15s;" class="fpg-opt" id="fpgLbl4">
+            <input type="radio" name="formaPagamento" value="parc10" style="margin-top:2px; accent-color:var(--wine);" onchange="selecionarFpg()">
+            <div>
+              <div style="font-size:13px; font-weight:600; color:var(--ink);">Parcelado 10x — Entrada 25% + 9 parcelas no cartão</div>
+              <div style="font-size:12px; color:var(--muted); margin-top:2px;" id="rsFpg4Det">—</div>
+              <div style="font-size:12px; color:var(--wine); font-weight:600; margin-top:1px;" id="rsFpg4Total">Total: —</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- forma selecionada final (visível só quando selecionado) -->
+      <div id="rsFpgSelecionada" style="display:none; background:var(--blush); border-radius:8px; padding:14px 16px; margin-bottom:6px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--wine); margin-bottom:6px;">✓ Forma selecionada</div>
+        <div style="font-size:14px; font-weight:600; color:var(--ink);" id="rsFpgTexto">—</div>
+        <div style="font-size:13px; color:var(--wine); font-weight:700; margin-top:4px;" id="rsFpgValor">—</div>
+      </div>
+
+      <!-- botão imprimir resumo -->
+      <div style="margin-top:14px; text-align:right;" class="no-print">
+        <button class="btn btn-primary" onclick="imprimirResumo()" style="font-size:12px; padding:9px 16px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Imprimir Resumo para Cobrança
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. OBSERVAÇÕES -->
   <section>
     <div class="section-label">Observações</div>
     <div class="card">
@@ -524,10 +798,15 @@
 <script>
   // ── DATA NO HEADER ──
   const hoje = new Date();
-  document.getElementById('headerDate').textContent =
-    'Dra. Maíra Vilela  ·  ' +
-    hoje.toLocaleDateString('pt-BR', { weekday:'long', day:'2-digit', month:'long', year:'numeric' });
-  document.getElementById('dataRelatorio').value = hoje.toISOString().split('T')[0];
+  function atualizarHeaderDate() {
+    const cirug = document.getElementById('nomeCirurgiao')?.value?.trim();
+    const label = cirug ? cirug + '  ·  ' : '';
+    document.getElementById('headerDate').textContent =
+      label + hoje.toLocaleDateString('pt-BR', { weekday:'long', day:'2-digit', month:'long', year:'numeric' });
+  }
+  atualizarHeaderDate();
+  document.getElementById('dataRelatorio').value =
+    hoje.toLocaleDateString('pt-BR', { day:'2-digit', month:'2-digit', year:'numeric' });
 
   // ── UTILS ──
   function brl(v) {
@@ -594,30 +873,132 @@
     const vlhCons        = num('vlhCirurgiConsulta');
     const vlhAuxiliar    = num('vlhAuxiliar');
     const vlhTecnico     = num('vlhTecnico');
-    const vlExames       = num('vlExames');
+    const vlExames         = num('vlExames');
+    const vlEquipamentos   = num('vlEquipamentos');
+    const horasSala          = horaCirurgia;                    // espelha Tempo de Cirurgia
+    const vlhSala            = num('vlhSala');
+    const horasSalaConsulta  = qtdPre + qtdPos;                  // espelha soma consultas
+    const vlhSalaConsulta    = num('vlhSalaConsulta');
+    // Sync readonly display
+    document.getElementById('horasSala').value = horasSala || '';
+    document.getElementById('horasSalaConsulta').value = horasSalaConsulta || '';
 
-    const totalConsultas = (qtdPre + qtdPos) * vlhCons;
-    const custoCirurgiao = horaCirurgia * vlhCirc;
-    const custoAuxiliar  = horaCirurgia * vlhAuxiliar;
-    const custoTecnico   = horaCirurgia * vlhTecnico;
+    const totalConsultas  = (qtdPre + qtdPos) * vlhCons;
+    const custoCirurgiao  = horaCirurgia * vlhCirc;
+    const custoAuxiliar   = horaCirurgia * vlhAuxiliar;
+    const custoTecnico    = horaCirurgia * vlhTecnico;
+    const custoSala       = horasSala * vlhSala;
+    const custoSalaCons   = horasSalaConsulta * vlhSalaConsulta;
     const { total: custoMat } = getMateriais();
 
-    const total = totalConsultas + vlExames + custoCirurgiao + custoAuxiliar + custoTecnico + custoMat;
+    const total = totalConsultas + vlExames + vlEquipamentos + custoCirurgiao + custoAuxiliar + custoTecnico + custoSala + custoSalaCons + custoMat;
 
     document.getElementById('rConsultas').textContent = brl(totalConsultas);
     document.getElementById('rExames').textContent    = brl(vlExames);
     document.getElementById('rCirurgiao').textContent = brl(custoCirurgiao);
     document.getElementById('rAuxiliar').textContent  = brl(custoAuxiliar);
     document.getElementById('rTecnico').textContent   = brl(custoTecnico);
+    document.getElementById('rSala').textContent               = brl(custoSala);
+    document.getElementById('totalSalaDisplay').value          = custoSala.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+    document.getElementById('rSalaConsulta').textContent       = brl(custoSalaCons);
+    document.getElementById('totalSalaConsultaDisplay').value  = custoSalaCons.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+    document.getElementById('rEquipamentos').textContent = brl(vlEquipamentos);
     document.getElementById('rMateriais').textContent = brl(custoMat);
     document.getElementById('rMatTotal').textContent  = brl(custoMat);
     document.getElementById('rTotal').textContent     = brl(total);
+
+    // ── FORMAS DE PAGAMENTO ──
+    const entradaParc  = total * 0.25;                          // entrada = 25% do total
+    const saldoParc    = total * 0.75;                          // saldo = 75% do total
+    const restoParc6   = saldoParc / 0.95;                      // saldo 6x com +5% taxa cartão
+    const parcelaVal6  = restoParc6 / 5;
+    const restoParc10  = saldoParc / 0.90;                      // saldo 10x com +10% taxa cartão
+    const parcelaVal10 = restoParc10 / 9;
+
+    const totParc6  = entradaParc + restoParc6;
+    const totParc10 = entradaParc + restoParc10;
+
+    document.getElementById('pgPix').textContent         = brl(total);
+    document.getElementById('pgCartaoVista').textContent = brl(total / 0.97);
+    document.getElementById('pgEntrada6').textContent    = brl(entradaParc);
+    document.getElementById('pgParcela6').textContent    = brl(parcelaVal6);
+    document.getElementById('pgTotal6').textContent      = brl(totParc6);
+    document.getElementById('pgEntrada10').textContent   = brl(entradaParc);
+    document.getElementById('pgParcela10').textContent   = brl(parcelaVal10);
+    document.getElementById('pgTotal10').textContent     = brl(totParc10);
+
+    // Sync resumo do paciente
+    atualizarResumo();
 
     const nome = document.getElementById('nomePaciente').value.trim();
     document.getElementById('rNomePaciente').textContent = nome || 'Paciente';
   }
 
   document.getElementById('nomePaciente').addEventListener('input', calcular);
+  document.getElementById('nomeCirurgiao').addEventListener('input', atualizarHeaderDate);
+
+  // ── RESUMO DO PACIENTE ──
+  function atualizarResumo() {
+    const nome    = document.getElementById('nomePaciente').value.trim() || '—';
+    const fone    = document.getElementById('telefonePaciente').value.trim();
+    const end     = document.getElementById('enderecoPaciente').value.trim();
+    const dataCir = document.getElementById('dataCirurgia').value
+                    ? new Date(document.getElementById('dataCirurgia').value + 'T12:00').toLocaleDateString('pt-BR') : '—';
+    const local   = document.getElementById('localCirurgia').value.trim() || '—';
+    const tipo    = document.querySelector('input[name="tipoCirurgia"]:checked')?.value || '—';
+    const indic   = document.getElementById('indicacao').value.trim() || '';
+    const cirurg  = document.getElementById('nomeCirurgiao').value.trim();
+
+    document.getElementById('rsNome').textContent         = nome;
+    document.getElementById('rsContato').textContent      = [fone, end].filter(Boolean).join(' · ') || '—';
+    document.getElementById('rsDataCirurgia').textContent = 'Cirurgia: ' + dataCir;
+    document.getElementById('rsLocal').textContent        = local;
+    document.getElementById('rsTipoProcedimento').textContent = tipo + (indic ? ' — ' + indic : '');
+    document.getElementById('rsCirurgiao').textContent    = cirurg ? 'Cirurgião(ã): ' + cirurg : '';
+    document.getElementById('rsTotal').textContent        = document.getElementById('rTotal').textContent;
+
+    // Atualizar valores de pagamento no resumo
+    document.getElementById('rsFpg1').textContent  = document.getElementById('pgPix').textContent;
+    document.getElementById('rsFpg2').textContent  = document.getElementById('pgCartaoVista').textContent;
+    document.getElementById('rsFpg3Det').textContent   = 'Entrada: ' + document.getElementById('pgEntrada6').textContent + ' + 5× de ' + document.getElementById('pgParcela6').textContent;
+    document.getElementById('rsFpg3Total').textContent = 'Total: ' + document.getElementById('pgTotal6').textContent;
+    document.getElementById('rsFpg4Det').textContent   = 'Entrada: ' + document.getElementById('pgEntrada10').textContent + ' + 9× de ' + document.getElementById('pgParcela10').textContent;
+    document.getElementById('rsFpg4Total').textContent = 'Total: ' + document.getElementById('pgTotal10').textContent;
+
+    selecionarFpg(); // re-sync highlight
+  }
+
+  function selecionarFpg() {
+    const sel = document.querySelector('input[name="formaPagamento"]:checked')?.value;
+    document.querySelectorAll('.fpg-opt').forEach(el => {
+      el.style.borderColor = 'var(--line)';
+      el.style.background = 'transparent';
+    });
+    const divSel = document.getElementById('rsFpgSelecionada');
+    if (!sel) { divSel.style.display = 'none'; return; }
+    const map = { pix:'fpgLbl1', cartao:'fpgLbl2', parc6:'fpgLbl3', parc10:'fpgLbl4' };
+    const lbl = document.getElementById(map[sel]);
+    if (lbl) { lbl.style.borderColor = 'var(--wine)'; lbl.style.background = 'var(--blush)'; }
+
+    const textos = {
+      pix:    ['À vista — Pix ou Dinheiro', document.getElementById('pgPix').textContent],
+      cartao: ['À vista — Cartão de Crédito/Débito',    document.getElementById('pgCartaoVista').textContent],
+      parc6:  ['Parcelado 6x — Entrada ' + document.getElementById('pgEntrada6').textContent + ' + 5× de ' + document.getElementById('pgParcela6').textContent, 'Total: ' + document.getElementById('pgTotal6').textContent],
+      parc10: ['Parcelado 10x — Entrada ' + document.getElementById('pgEntrada10').textContent + ' + 9× de ' + document.getElementById('pgParcela10').textContent, 'Total: ' + document.getElementById('pgTotal10').textContent],
+    };
+    if (textos[sel]) {
+      document.getElementById('rsFpgTexto').textContent = textos[sel][0];
+      document.getElementById('rsFpgValor').textContent = textos[sel][1];
+      divSel.style.display = 'block';
+    }
+  }
+
+  function imprimirResumo() {
+    // Marca o body para o @media print mostrar só o resumo
+    document.body.classList.add('print-resumo');
+    window.print();
+    document.body.classList.remove('print-resumo');
+  }
 
   // ── WHATSAPP — usa wa.me/send?text= para abrir seletor de contato ──
   function enviarWhatsApp() {
@@ -625,10 +1006,19 @@
     const fone   = document.getElementById('telefonePaciente').value.trim();
     const end    = document.getElementById('enderecoPaciente').value.trim();
     const data   = document.getElementById('dataRelatorio').value
-                    ? new Date(document.getElementById('dataRelatorio').value + 'T12:00').toLocaleDateString('pt-BR')
-                    : hoje.toLocaleDateString('pt-BR');
+                    || hoje.toLocaleDateString('pt-BR');
     const tipo   = document.querySelector('input[name="tipoCirurgia"]:checked')?.value || '—';
-    const indic  = document.getElementById('indicacao').value.trim() || '—';
+    const indic       = document.getElementById('indicacao').value.trim() || '—';
+    const dataCirurg  = document.getElementById('dataCirurgia').value
+                         ? new Date(document.getElementById('dataCirurgia').value + 'T12:00').toLocaleDateString('pt-BR')
+                         : '—';
+    const localCirurg = document.getElementById('localCirurgia').value.trim() || '—';
+    const nomeCirurg  = document.getElementById('nomeCirurgiao').value.trim();
+    const nomeAux     = document.getElementById('nomeAuxiliar').value.trim();
+    const nomeTec     = document.getElementById('nomeTecnico').value.trim();
+    const fpgSel   = document.querySelector('input[name="formaPagamento"]:checked')?.value;
+    const fpgTexto = document.getElementById('rsFpgTexto')?.textContent || '';
+    const fpgValor = document.getElementById('rsFpgValor')?.textContent || '';
     const obs    = document.getElementById('observacoes').value.trim();
     const { total: custoMat, itens: matItens } = getMateriais();
 
@@ -647,8 +1037,13 @@
       `👤 *Paciente:* ${nome}`,
       fone ? `📞 Telefone: ${fone}` : '',
       end  ? `📍 Endereço: ${end}`  : '',
+      `📅 Data da cirurgia: ${dataCirurg}`,
+      `🏥 Local: ${localCirurg}`,
       ``,
       `🔬 *Procedimento:* ${tipo} – ${indic}`,
+      nomeCirurg ? `👩‍⚕️ Cirurgião: ${nomeCirurg}` : '',
+      nomeAux    ? `👨‍⚕️ Auxiliar: ${nomeAux}`    : '',
+      nomeTec    ? `🔧 Técnico: ${nomeTec}`       : '',
       ``,
       `💰 *Composição do custo:*`,
       `• Consultas pré/pós: ${document.getElementById('rConsultas').textContent}`,
@@ -656,11 +1051,21 @@
       `• Cirurgião (ato): ${document.getElementById('rCirurgiao').textContent}`,
       `• Auxiliar: ${document.getElementById('rAuxiliar').textContent}`,
       `• Técnico: ${document.getElementById('rTecnico').textContent}`,
+      `• Taxa de sala (cirurgia): ${document.getElementById('rSala').textContent}`,
+      `• Taxa de sala (consultas): ${document.getElementById('rSalaConsulta').textContent}`,
+      `• Equipamentos: ${document.getElementById('rEquipamentos').textContent}`,
       `• Materiais: ${document.getElementById('rMateriais').textContent}`,
       matBlock,
       ``,
       `✅ *TOTAL: ${document.getElementById('rTotal').textContent}*`,
+      fpgSel ? `\n💳 *Forma de pagamento escolhida:*\n${fpgTexto}\n${fpgValor}` : '',
       obs ? `\n📝 Obs: ${obs}` : '',
+      ``,
+      `💳 *Formas de Pagamento:*`,
+      `1. À vista Pix/Dinheiro: ${document.getElementById('pgPix').textContent}`,
+      `2. À vista Cartão (+ 3%): ${document.getElementById('pgCartaoVista').textContent}`,
+      `3. Parcelado 6x — Entrada: ${document.getElementById('pgEntrada6').textContent} + 5× de ${document.getElementById('pgParcela6').textContent}`,
+      `4. Parcelado 10x — Entrada: ${document.getElementById('pgEntrada10').textContent} + 9× de ${document.getElementById('pgParcela10').textContent}`,
       ``,
       `_Dra. Maíra Vilela – Cirurgia Vascular_`
     ].filter(l => l !== '').join('\n');
@@ -674,8 +1079,12 @@
   function salvarLocal() {
     const ids = ['nomePaciente','telefonePaciente','enderecoPaciente','dataRelatorio',
                  'indicacao','horaCirurgia','qtdPre','qtdPos',
+                 'nomeCirurgiao','nomeAuxiliar','nomeTecnico',
                  'vlhCirurgiCirurgia','vlhCirurgiConsulta','vlhAuxiliar','vlhTecnico',
-                 'vlExames','descExames','observacoes'];
+                 'vlhSala','vlhSalaConsulta',
+                 'vlEquipamentos','descEquipamentos',
+                 'vlExames','descExames',
+                 'dataCirurgia','localCirurgia','observacoes'];
     const data = {};
     ids.forEach(id => { const el = document.getElementById(id); if (el) data[id] = el.value; });
     const radio = document.querySelector('input[name="tipoCirurgia"]:checked');
@@ -703,8 +1112,12 @@
       const data = JSON.parse(saved);
       const ids = ['nomePaciente','telefonePaciente','enderecoPaciente','dataRelatorio',
                    'indicacao','horaCirurgia','qtdPre','qtdPos',
+                   'nomeCirurgiao','nomeAuxiliar','nomeTecnico',
                    'vlhCirurgiCirurgia','vlhCirurgiConsulta','vlhAuxiliar','vlhTecnico',
-                   'vlExames','descExames','observacoes'];
+                   'vlhSala','vlhSalaConsulta',
+                   'vlEquipamentos','descEquipamentos',
+                   'vlExames','descExames',
+                   'dataCirurgia','localCirurgia','observacoes'];
       ids.forEach(id => { const el = document.getElementById(id); if (el && data[id] !== undefined) el.value = data[id]; });
       if (data['tipoCirurgia']) {
         const r = document.querySelector(`input[name="tipoCirurgia"][value="${data['tipoCirurgia']}"]`);
@@ -724,7 +1137,8 @@
     document.querySelectorAll('input[type="radio"]').forEach(el => el.checked = false);
     document.getElementById('matBody').innerHTML = '';
     matId = 0;
-    document.getElementById('dataRelatorio').value = hoje.toISOString().split('T')[0];
+    document.getElementById('dataRelatorio').value =
+    hoje.toLocaleDateString('pt-BR', { day:'2-digit', month:'2-digit', year:'numeric' });
     calcular();
   }
 
