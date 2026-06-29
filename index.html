@@ -563,19 +563,30 @@
     <div class="section-label">Custo Estimado</div>
     <div class="result-card">
       <div class="result-title">Composição do custo — <span id="rNomePaciente">Paciente</span></div>
-      <div class="result-lines">
+      <!-- BLOCO A: Honorários -->
+      <div style="font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:8px;">
+        A · Honorários Médicos
+      </div>
+      <div class="result-lines" style="margin-bottom:14px;">
+        <div class="result-line">
+          <span class="rl-label">Cirurgião — ato cirúrgico</span>
+          <span class="rl-value" id="rCirurgiao">R$ 0,00</span>
+        </div>
         <div class="result-line">
           <span class="rl-label">Consultas pré/pós-cirúrgicas</span>
           <span class="rl-value" id="rConsultas">R$ 0,00</span>
         </div>
-        <div class="result-line">
-          <span class="rl-label">Exames pré-cirúrgicos</span>
-          <span class="rl-value" id="rExames">R$ 0,00</span>
-        </div>
-        <div class="result-line">
-          <span class="rl-label">Médico cirurgião (ato cirúrgico)</span>
-          <span class="rl-value" id="rCirurgiao">R$ 0,00</span>
-        </div>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:baseline; background:rgba(255,255,255,.1); border-radius:6px; padding:8px 12px; margin-bottom:18px;">
+        <span style="font-size:11px; font-weight:600; opacity:.85;">Subtotal Honorários</span>
+        <span style="font-size:15px; font-weight:700;" id="rSubHonorarios">R$ 0,00</span>
+      </div>
+
+      <!-- BLOCO B: Custos Operacionais -->
+      <div style="font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:8px;">
+        B · Custos Operacionais
+      </div>
+      <div class="result-lines" style="margin-bottom:14px;">
         <div class="result-line">
           <span class="rl-label">Médico auxiliar</span>
           <span class="rl-value" id="rAuxiliar">R$ 0,00</span>
@@ -583,6 +594,10 @@
         <div class="result-line">
           <span class="rl-label">Técnico / Instrumentador</span>
           <span class="rl-value" id="rTecnico">R$ 0,00</span>
+        </div>
+        <div class="result-line">
+          <span class="rl-label">Exames pré-cirúrgicos</span>
+          <span class="rl-value" id="rExames">R$ 0,00</span>
         </div>
         <div class="result-line">
           <span class="rl-label">Taxa de sala — cirurgia</span>
@@ -600,11 +615,32 @@
           <span class="rl-label">Materiais e insumos</span>
           <span class="rl-value" id="rMateriais">R$ 0,00</span>
         </div>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:baseline; background:rgba(255,255,255,.1); border-radius:6px; padding:8px 12px; margin-bottom:18px;">
+        <span style="font-size:11px; font-weight:600; opacity:.85;">Subtotal Custos Operacionais</span>
+        <span style="font-size:15px; font-weight:700;" id="rSubCustos">R$ 0,00</span>
+      </div>
+
+      <!-- TRIBUTAÇÃO -->
+      <div class="result-lines" style="margin-bottom:16px;">
         <div class="result-line">
           <span class="rl-label">Estimativa de Tributação (8,5% embutido)</span>
           <span class="rl-value" id="rTributacao">R$ 0,00</span>
         </div>
       </div>
+
+      <!-- MARGEM E TOTAL -->
+      <div style="background:rgba(255,255,255,.12); border-radius:8px; padding:12px 14px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:10px; font-weight:600; letter-spacing:1px; text-transform:uppercase; opacity:.7;">Margem Líquida Estimada</div>
+          <div style="font-size:11px; opacity:.6; margin-top:2px;">Honorários − Custos Op. − Tributação</div>
+        </div>
+        <div style="text-align:right;">
+          <span style="font-size:20px; font-weight:700; color:#FFD9A0;" id="rMargem">R$ 0,00</span>
+          <span style="display:block; font-size:11px; color:#FFD9A0; opacity:.8;" id="rMargemPct">0%</span>
+        </div>
+      </div>
+
       <div class="result-total">
         <span class="rt-label">TOTAL AO PACIENTE</span>
         <span class="rt-value" id="rTotal">R$ 0,00</span>
@@ -795,12 +831,37 @@
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg>
       Novo cálculo
     </button>
+    <button class="btn btn-secondary" onclick="registrarOrcamento()" style="background:var(--green);color:#fff;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Registrar orçamento
+    </button>
   </div>
+
+  <!-- HISTÓRICO -->
+  <section id="secaoHistorico" style="margin-top:32px;">
+    <div class="section-label" style="cursor:pointer;" onclick="toggleHistorico()">
+      Histórico de Orçamentos
+      <span id="historicoCount" style="background:var(--wine);color:#fff;border-radius:20px;padding:1px 8px;font-size:10px;margin-left:6px;">0</span>
+      <span id="historicoToggleIcon" style="margin-left:auto;font-size:12px;color:var(--muted);">▼</span>
+    </div>
+    <div id="historicoBody" style="display:none;">
+      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+        <button class="btn btn-secondary" onclick="exportarCSV()" style="font-size:12px;padding:8px 14px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Exportar CSV
+        </button>
+        <button class="btn btn-clear" onclick="limparHistorico()" style="font-size:12px;padding:8px 14px;">
+          Limpar histórico
+        </button>
+      </div>
+      <div id="historicoLista"></div>
+    </div>
+  </section>
 
 </main>
 
 <script>
-  // ── DATA NO HEADER ──
+  // -- DATA NO HEADER --
   const hoje = new Date();
   function atualizarHeaderDate() {
     const cirug = document.getElementById('nomeCirurgiao')?.value?.trim();
@@ -812,13 +873,13 @@
   document.getElementById('dataRelatorio').value =
     hoje.toLocaleDateString('pt-BR', { day:'2-digit', month:'2-digit', year:'numeric' });
 
-  // ── UTILS ──
+  // -- UTILS --
   function brl(v) {
     return 'R$ ' + (isNaN(v) ? 0 : v).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
   function num(id) { return parseFloat(document.getElementById(id).value) || 0; }
 
-  // ── MATERIAIS ──
+  // -- MATERIAIS --
   let matId = 0;
 
   function addMaterial(desc, val) {
@@ -868,7 +929,7 @@
     return { total, itens };
   }
 
-  // ── CALCULAR ──
+  // -- CALCULAR --
   function calcular() {
     const horaCirurgia   = num('horaCirurgia');
     const qtdPre         = num('qtdPre');
@@ -899,11 +960,17 @@
     const total      = custoBruto / (1 - 0.085);   // tributo embutido por dentro (8,5%)
     const tributacao = total - custoBruto;
 
-    document.getElementById('rConsultas').textContent = brl(totalConsultas);
-    document.getElementById('rExames').textContent    = brl(vlExames);
+    const subHonorarios = custoCirurgiao + totalConsultas;
+    const subCustos     = custoAuxiliar + custoTecnico + vlExames + custoSala + custoSalaCons + vlEquipamentos + custoMat;
+    const margem        = subHonorarios - subCustos - tributacao;
+    const margemPct     = subHonorarios > 0 ? (margem / total * 100) : 0;
+
     document.getElementById('rCirurgiao').textContent = brl(custoCirurgiao);
+    document.getElementById('rConsultas').textContent = brl(totalConsultas);
+    document.getElementById('rSubHonorarios').textContent = brl(subHonorarios);
     document.getElementById('rAuxiliar').textContent  = brl(custoAuxiliar);
     document.getElementById('rTecnico').textContent   = brl(custoTecnico);
+    document.getElementById('rExames').textContent    = brl(vlExames);
     document.getElementById('rSala').textContent               = brl(custoSala);
     document.getElementById('totalSalaDisplay').value          = custoSala.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
     document.getElementById('rSalaConsulta').textContent       = brl(custoSalaCons);
@@ -911,10 +978,13 @@
     document.getElementById('rEquipamentos').textContent = brl(vlEquipamentos);
     document.getElementById('rMateriais').textContent = brl(custoMat);
     document.getElementById('rMatTotal').textContent  = brl(custoMat);
-    document.getElementById('rTributacao').textContent = brl(tributacao);
-    document.getElementById('rTotal').textContent     = brl(total);
+    document.getElementById('rSubCustos').textContent   = brl(subCustos);
+    document.getElementById('rTributacao').textContent  = brl(tributacao);
+    document.getElementById('rMargem').textContent      = brl(margem);
+    document.getElementById('rMargemPct').textContent   = margemPct.toFixed(1).replace('.',',') + '%';
+    document.getElementById('rTotal').textContent       = brl(total);
 
-    // ── FORMAS DE PAGAMENTO ──
+    // -- FORMAS DE PAGAMENTO --
     const entradaParc  = total * 0.25;                          // entrada = 25% do total
     const saldoParc    = total * 0.75;                          // saldo = 75% do total
     const restoParc6   = saldoParc / 0.95;                      // saldo 6x com +5% taxa cartão
@@ -944,7 +1014,7 @@
   document.getElementById('nomePaciente').addEventListener('input', calcular);
   document.getElementById('nomeCirurgiao').addEventListener('input', atualizarHeaderDate);
 
-  // ── RESUMO DO PACIENTE ──
+  // -- RESUMO DO PACIENTE --
   function atualizarResumo() {
     const nome    = document.getElementById('nomePaciente').value.trim() || '—';
     const fone    = document.getElementById('telefonePaciente').value.trim();
@@ -1007,7 +1077,7 @@
     document.body.classList.remove('print-resumo');
   }
 
-  // ── WHATSAPP — usa wa.me/send?text= para abrir seletor de contato ──
+  // -- WHATSAPP — usa wa.me/send?text= para abrir seletor de contato --
   function enviarWhatsApp() {
     const nome   = document.getElementById('nomePaciente').value.trim() || 'Paciente';
     const fone   = document.getElementById('telefonePaciente').value.trim();
@@ -1083,7 +1153,7 @@
     window.open(url, '_blank');
   }
 
-  // ── SALVAR LOCAL ──
+  // -- SALVAR LOCAL --
   function salvarLocal() {
     const ids = ['nomePaciente','telefonePaciente','enderecoPaciente','dataRelatorio',
                  'indicacao','horaCirurgia','qtdPre','qtdPos',
@@ -1150,9 +1220,138 @@
     calcular();
   }
 
+  // -- REGISTRAR ORÇAMENTO --
+  function registrarOrcamento() {
+    const nome   = document.getElementById('nomePaciente').value.trim();
+    const total  = document.getElementById('rTotal').textContent;
+    if (!nome || total === 'R$ 0,00') {
+      alert('Preencha ao menos o nome do paciente e os valores antes de registrar.'); return;
+    }
+    const fpgTexto = document.getElementById('rsFpgTexto')?.textContent || '—';
+    const fpgValor = document.getElementById('rsFpgValor')?.textContent || '—';
+    const registro = {
+      id:           Date.now(),
+      data:         document.getElementById('dataRelatorio').value,
+      dataCirurgia: document.getElementById('dataCirurgia').value
+                    ? new Date(document.getElementById('dataCirurgia').value+'T12:00').toLocaleDateString('pt-BR') : '—',
+      paciente:     nome,
+      procedimento: (document.querySelector('input[name="tipoCirurgia"]:checked')?.value || '') + ' ' +
+                    (document.getElementById('indicacao').value.trim() || ''),
+      local:        document.getElementById('localCirurgia').value.trim() || '—',
+      cirurgiao:    document.getElementById('nomeCirurgiao').value.trim() || '—',
+      honorarios:   document.getElementById('rSubHonorarios').textContent,
+      custos:       document.getElementById('rSubCustos').textContent,
+      tributacao:   document.getElementById('rTributacao').textContent,
+      margem:       document.getElementById('rMargem').textContent,
+      margemPct:    document.getElementById('rMargemPct').textContent,
+      total:        total,
+      formaPgto:    fpgTexto,
+      valorPgto:    fpgValor,
+    };
+    const hist = getHistorico();
+    hist.unshift(registro);
+    localStorage.setItem('lifevarizes_historico', JSON.stringify(hist));
+    renderHistorico();
+    document.getElementById('historicoBody').style.display = 'block';
+    document.getElementById('historicoToggleIcon').textContent = '▲';
+    alert('✅ Orçamento registrado no histórico!');
+  }
+
+  function getHistorico() {
+    try { return JSON.parse(localStorage.getItem('lifevarizes_historico') || '[]'); }
+    catch(e) { return []; }
+  }
+
+  function toggleHistorico() {
+    const body = document.getElementById('historicoBody');
+    const icon = document.getElementById('historicoToggleIcon');
+    const open = body.style.display !== 'none';
+    body.style.display = open ? 'none' : 'block';
+    icon.textContent = open ? '▼' : '▲';
+  }
+
+  function renderHistorico() {
+    const hist = getHistorico();
+    document.getElementById('historicoCount').textContent = hist.length;
+    const lista = document.getElementById('historicoLista');
+    if (!hist.length) {
+      lista.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:16px 0;">Nenhum orçamento registrado ainda.</div>';
+      return;
+    }
+    lista.innerHTML = hist.map(r => `
+      <div style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:10px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--ink);">${r.paciente}</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:3px;">${r.procedimento.trim() || '—'} · ${r.dataCirurgia}</div>
+            <div style="font-size:12px;color:var(--muted);">${r.local}</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0;">
+            <div style="font-size:16px;font-weight:700;color:var(--wine);">${r.total}</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px;">Registrado em ${r.data}</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid #F0E8EA;">
+          <div style="font-size:11px;">
+            <div style="color:var(--muted);margin-bottom:2px;">Honorários</div>
+            <div style="font-weight:600;color:var(--ink);">${r.honorarios}</div>
+          </div>
+          <div style="font-size:11px;">
+            <div style="color:var(--muted);margin-bottom:2px;">Custos Op.</div>
+            <div style="font-weight:600;color:var(--ink);">${r.custos}</div>
+          </div>
+          <div style="font-size:11px;">
+            <div style="color:var(--muted);margin-bottom:2px;">Tributação</div>
+            <div style="font-weight:600;color:var(--ink);">${r.tributacao}</div>
+          </div>
+          <div style="font-size:11px;">
+            <div style="color:var(--muted);margin-bottom:2px;">Margem líq.</div>
+            <div style="font-weight:600;color:var(--green);">${r.margem} <span style="color:var(--muted);font-weight:400;">(${r.margemPct})</span></div>
+          </div>
+        </div>
+        <div style="margin-top:10px;padding-top:10px;border-top:1px solid #F0E8EA;font-size:11px;color:var(--muted);">
+          💳 ${r.formaPgto} · <strong style="color:var(--ink);">${r.valorPgto}</strong>
+          <button onclick="removerRegistro(${r.id})" style="float:right;background:none;border:none;color:#ccc;cursor:pointer;font-size:12px;" title="Remover">✕</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function removerRegistro(id) {
+    if (!confirm('Remover este registro do histórico?')) return;
+    const hist = getHistorico().filter(r => r.id !== id);
+    localStorage.setItem('lifevarizes_historico', JSON.stringify(hist));
+    renderHistorico();
+  }
+
+  function limparHistorico() {
+    if (!confirm('Apagar todo o histórico de orçamentos? Esta ação não pode ser desfeita.')) return;
+    localStorage.removeItem('lifevarizes_historico');
+    renderHistorico();
+  }
+
+  function exportarCSV() {
+    const hist = getHistorico();
+    if (!hist.length) { alert('Nenhum registro para exportar.'); return; }
+    const cols = ['Data','Data Cirurgia','Paciente','Procedimento','Local','Cirurgião',
+                  'Honorários','Custos Op.','Tributação','Margem','Margem %','Total','Forma Pgto','Valor Pgto'];
+    const linhas = hist.map(r => [
+      r.data, r.dataCirurgia, r.paciente, r.procedimento.trim(), r.local, r.cirurgiao,
+      r.honorarios, r.custos, r.tributacao, r.margem, r.margemPct, r.total, r.formaPgto, r.valorPgto
+    ].map(v => `"${(v||'').replace(/"/g,'""')}"`).join(';'));
+    const csv = '﻿' + [cols.join(';'), ...linhas].join('
+'); // BOM para Excel PT-BR
+    const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'orcamentos_life_varizes_' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click();
+  }
+
   // Inicializar com uma linha de material em branco e carregar dados salvos
   addMaterial();
   carregarLocal();
+  renderHistorico();
 </script>
 </body>
 </html>
