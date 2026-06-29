@@ -600,9 +600,13 @@
           <span class="rl-label">Materiais e insumos</span>
           <span class="rl-value" id="rMateriais">R$ 0,00</span>
         </div>
+        <div class="result-line">
+          <span class="rl-label">Estimativa de Tributação (8,5% embutido)</span>
+          <span class="rl-value" id="rTributacao">R$ 0,00</span>
+        </div>
       </div>
       <div class="result-total">
-        <span class="rt-label">CUSTO TOTAL DA CIRURGIA</span>
+        <span class="rt-label">TOTAL AO PACIENTE</span>
         <span class="rt-value" id="rTotal">R$ 0,00</span>
       </div>
     </div>
@@ -891,7 +895,9 @@
     const custoSalaCons   = horasSalaConsulta * vlhSalaConsulta;
     const { total: custoMat } = getMateriais();
 
-    const total = totalConsultas + vlExames + vlEquipamentos + custoCirurgiao + custoAuxiliar + custoTecnico + custoSala + custoSalaCons + custoMat;
+    const custoBruto = totalConsultas + vlExames + vlEquipamentos + custoCirurgiao + custoAuxiliar + custoTecnico + custoSala + custoSalaCons + custoMat;
+    const total      = custoBruto / (1 - 0.085);   // tributo embutido por dentro (8,5%)
+    const tributacao = total - custoBruto;
 
     document.getElementById('rConsultas').textContent = brl(totalConsultas);
     document.getElementById('rExames').textContent    = brl(vlExames);
@@ -905,6 +911,7 @@
     document.getElementById('rEquipamentos').textContent = brl(vlEquipamentos);
     document.getElementById('rMateriais').textContent = brl(custoMat);
     document.getElementById('rMatTotal').textContent  = brl(custoMat);
+    document.getElementById('rTributacao').textContent = brl(tributacao);
     document.getElementById('rTotal').textContent     = brl(total);
 
     // ── FORMAS DE PAGAMENTO ──
@@ -1055,6 +1062,7 @@
       `• Taxa de sala (consultas): ${document.getElementById('rSalaConsulta').textContent}`,
       `• Equipamentos: ${document.getElementById('rEquipamentos').textContent}`,
       `• Materiais: ${document.getElementById('rMateriais').textContent}`,
+      `• Tributação (8,5% embutido): ${document.getElementById('rTributacao').textContent}`,
       matBlock,
       ``,
       `✅ *TOTAL: ${document.getElementById('rTotal').textContent}*`,
